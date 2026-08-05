@@ -29,15 +29,10 @@ jobs:
           cd BrowserOS/packages/browseros
           python -m bos_build source ensure --root /tmp/chromium
 
-      - name: Apply DARWIN C++ Patches
+      - name: Compile & Package DARWIN OS Binary
         run: |
           cd BrowserOS/packages/browseros
-          python -m bos_build dev apply --root /tmp/chromium
-
-      - name: Compile DARWIN OS Binary
-        run: |
-          cd BrowserOS/packages/browseros
-          python -m bos_build build --root /tmp/chromium
+          python -m bos_build build --chromium-src /tmp/chromium/src --prep --build --package --no-sign
 
       - name: Upload DARWIN OS Artifact
         uses: actions/upload-artifact@v4
