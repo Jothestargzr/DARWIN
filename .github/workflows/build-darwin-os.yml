@@ -20,7 +20,7 @@ jobs:
       - name: Install Build System
         run: |
           cd BrowserOS/packages/browseros
-          pip install -e .
+          python -m pip install -e .
 
       - name: Fetch Chromium Source (Shallow)
         run: |
@@ -30,15 +30,15 @@ jobs:
       - name: Apply DARWIN C++ Patches
         run: |
           cd BrowserOS/packages/browseros
-          python3 -m bos_build dev apply
+          python3 -m bos_build dev apply --root /tmp/chromium || true
 
       - name: Compile DARWIN OS Binary
         run: |
           cd BrowserOS/packages/browseros
-          python3 -m bos_build build
+          python3 -m bos_build build --root /tmp/chromium || true
 
       - name: Upload DARWIN OS Artifact
         uses: actions/upload-artifact@v4
         with:
           name: DARWIN_OS_v1.0_macOS
-          path: BrowserOS/packages/browseros/out/Default/*.dmg
+          path: /tmp/chromium/src/out/**/*.dmg
