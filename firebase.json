@@ -1,0 +1,16 @@
+{
+  "hosting": {
+    "public": "BrowserOS/packages/browseros-agent/apps/app/dist/chrome-mv3-dev",
+    "ignore": [
+      "firebase.json",
+      "**/.*",
+      "**/node_modules/**"
+    ],
+    "rewrites": [
+      {
+        "source": "**",
+        "destination": "/index.html"
+      }
+    ]
+  }
+}

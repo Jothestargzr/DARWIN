@@ -1,0 +1,1187 @@
+GLM-5 CyberSec Scan — 2026-08-05 00:35:53.479706
+============================================================
+
+### System Info
+ProductName:		macOS
+ProductVersion:		15.6
+BuildVersion:		24G5065c
+Uptime: 0:35  up 4 days,  2:51, 1 user, load averages: 5.05 4.85 7.92
+
+--- Disk Usage ---
+Filesystem        Size    Used   Avail Capacity iused ifree %iused  Mounted on
+/dev/disk1s2s1   233Gi    21Gi    11Gi    66%    425k  114M    0%   /
+
+────────────────────────────────────────
+
+### Running Processes
+
+
+────────────────────────────────────────
+
+### Network Connections
+--- netstat ---
+Active Internet connections (including servers)
+Proto Recv-Q Send-Q  Local Address          Foreign Address        (state)    
+tcp4       0      0  192.168.1.186.64526    54.157.227.108.443     ESTABLISHED
+tcp6       0      0  2a01:4b00:87fa:e.64525 2001:4860:4802:3.443   ESTABLISHED
+tcp6       0      0  2a01:4b00:87fa:e.64522 2606:4700::6812:.443   ESTABLISHED
+tcp6       0      0  2a01:4b00:87fa:e.64521 2a00:1450:4009:c.443   ESTABLISHED
+tcp4       0      0  192.168.1.186.64520    162.159.140.229.443    ESTABLISHED
+tcp4       0      0  192.168.1.186.64518    99.86.91.41.443        ESTABLISHED
+tcp4       0      0  192.168.1.186.64517    146.75.72.157.443      ESTABLISHED
+tcp4       0      0  192.168.1.186.64516    34.120.15.67.443       ESTABLISHED
+tcp4       0      0  192.168.1.186.64515    146.75.72.217.443      ESTABLISHED
+tcp4       0      0  192.168.1.186.64514    18.244.124.122.443     ESTABLISHED
+tcp4       0      0  192.168.1.186.64513    146.75.72.157.443      ESTABLISHED
+tcp4       0      0  192.168.1.186.64512    162.159.138.60.443     ESTABLISHED
+tcp4       0      0  192.168.1.186.64511    34.120.202.204.443     ESTABLISHED
+tcp6       0      0  2a01:4b00:87fa:e.64510 2a00:1450:4009:c.443   ESTABLISHED
+tcp4       0      0  192.168.1.186.64508    146.75.72.217.443      ESTABLISHED
+tcp4       0      0  192.168.1.186.64507    146.75.72.217.443      ESTABLISHED
+tcp6       0      0  2a01:4b00:87fa:e.64506 2606:4700::6810:.443   ESTABLISHED
+tcp4       0      0  192.168.1.186.64505    162.159.138.60.443     ESTABLISHED
+tcp6       0      0  2a01:4b00:87fa:e.64502 2a00:1450:4009:c.443   ESTABLISHED
+tcp6       0      0  2a01:4b00:87fa:e.64501 2606:4700::6812:.443   ESTABLISHED
+tcp6       0      0  2a01:4b00:87fa:e.64500 2606:4700::6812:.443   ESTABLISHED
+tcp6       0      0  2a01:4b00:87fa:e.64499 2606:4700::6812:.443   ESTABLISHED
+tcp4       0      0  127.0.0.1.64060        127.0.0.1.64496        ESTABLISHED
+tcp4       0      0  127.0.0.1.64496        127.0.0.1.64060        ESTABLISHED
+tcp6       0      0  2a01:4b00:87fa:e.64495 2001:4860:4842:4.443   ESTABLISHED
+tcp6       0      0  2a01:4b00:87fa:e.64494 2a00:1450:4009:c.443   ESTABLISHED
+tcp6       0      0  2a01:4b00:87fa:e.64492 2620:1ec:48:1::6.443   ESTABLISHED
+tcp6       0      0  2a01:4b00:87fa:e.64490 2a06:98c1:310d::.443   ESTABLISHED
+tcp4       0      0  192.168.1.186.64489    64.239.123.129.443     ESTABLISHED
+tcp4      24      0  192.168.1.186.64483    64.239.123.129.443     CLOSE_WAIT 
+tcp4       0      0  192.168.1.186.64478    100.59.70.86.443       ESTABLISHED
+tcp6       0      0  2a01:4b00:87fa:e.64475 2a00:1450:4009:c.443   ESTABLISHED
+tcp6       0      0  2a01:4b00:87fa:e.64473 2001:4860:4846:4.443   ESTABLISHED
+tcp6       0      0  2a01:4b00:87fa:e.64472 2a00:1450:4009:c.443   ESTABLISHED
+tcp6       0      0  2a01:4b00:87fa:e.64471 2001:4860:4845:4.443   ESTABLISHED
+tcp6       0      0  2a01:4b00:87fa:e.64467 2001:4860:4844:4.443   ESTABLISHED
+tcp6       0      0  2a01:4b00:87fa:e.64468 2001:4860:4844:4.443   ESTABLISHED
+tcp6       0      0  2a01:4b00:87fa:e.64466 2a00:1450:4009:c.443   ESTABLISHED
+tcp6       0      0  2a01:4b00:87fa:e.64465 2001:4860:4841:4.443   ESTABLISHED
+tcp4       0      0  192.168.1.186.64461    216.137.53.72.443      ESTABLISHED
+tcp6       0      0  2a01:4b00:87fa:e.64458 2001:4860:4844:4.443   ESTABLISHED
+tcp4       0      0  192.168.1.186.64440    151.101.1.242.443      ESTABLISHED
+tcp4       0      0  192.168.1.186.64439    20.42.65.93.443        ESTABLISHED
+tcp6       0      0  2a01:4b00:87fa:e.64435 2606:50c0:8000::.443   ESTABLISHED
+tcp4       0      0  192.168.1.186.64434    151.101.193.242.443    ESTABLISHED
+tcp4       0      0  192.168.1.186.64424    151.101.193.242.443    ESTABLISHED
+tcp6       0      0  2a01:4b00:87fa:e.64420 2a00:1450:4009:c.443   ESTABLISHED
+tcp6       0      0  2a01:4b00:87fa:e.64404 2001:4860:4843:4.443   ESTABLISHED
+tcp6       0      0  2a01:4b00:87fa:e.64390 2a00:1450:4009:c.993   ESTABLISHED
+tcp6       0      0  2a01:4b00:87fa:e.64369 2606:4700::6812:.443   ESTABLISHED
+tcp6       0      0  2a01:4b00:87fa:e.64356 2606:4700::6812:.443   ESTABLISHED
+tcp4       0      0  127.0.0.1.64064        127.0.0.1.64326        ESTABLISHED
+tcp4       0      0  127.0.0.1.64326        127.0.0.1.64064        ESTABLISHED
+tcp4       0      0  127.0.0.1.64060        127.0.0.1.64325        ESTABLISHED
+tcp4       0      0  127.0.0.1.64325        127.0.0.1.64060        ESTABLISHED
+tcp4       0      0  192.168.1.186.64291    8.208.120.221.443      ESTABLISHED
+tcp6       0      0  fe80::aede:48ff:.64203 fe80::aede:48ff:.49304 ESTABLISHED
+tcp4       0      0  127.0.0.1.64060        127.0.0.1.64198        ESTABLISHED
+tcp4       0      0  127.0.0.1.64198        127.0.0.1.64060        ESTABLISHED
+tcp4       0      0  127.0.0.1.64060        127.0.0.1.64182        ESTABLISHED
+tcp4       0      0  127.0.0.1.64182        127.0.0.1.64060        ESTABLISHED
+tcp4       0      0  127.0.0.1.64064        127.0.0.1.64178        ESTABLISHED
+tcp4       0      0  127.0.0.1.64178        127.0.0.1.64064        ESTABLISHED
+tcp4       0      0  127.0.0.1.64095        127.0.0.1.64165        ESTABLISHED
+tcp4       0      0  127.0.0.1.64165        127.0.0.1.64095        ESTABLISHED
+tcp4       0      0  127.0.0.1.64108        127.0.0.1.64163        ESTABLISHED
+tcp4       0      0  127.0.0.1.64163        127.0.0.1.64108        ESTABLISHED
+tcp4       0      0  127.0.0.1.64108        *.*                    LISTEN     
+tcp4       0      0  127.0.0.1.64093        127.0.0.1.64161        ESTABLISHED
+tcp4       0      0  127.0.0.1.64161        127.0.0.1.64093        ESTABLISHED
+tcp4       0      0  127.0.0.1.64093        127.0.0.1.64160        ESTABLISHED
+tcp4       0      0  127.0.0.1.64160        127.0.0.1.64093        ESTABLISHED
+tcp4       0      0  127.0.0.1.64093        127.0.0.1.64154        ESTABLISHED
+tcp4       0      0  127.0.0.1.64154        127.0.0.1.64093        ESTABLISHED
+tcp4       0      0  127.0.0.1.64093        127.0.0.1.64153        ESTABLISHED
+tcp4       0      0  127.0.0.1.64153        127.0.0.1.64093        ESTABLISHED
+tcp4       0      0  192.168.1.186.64152    34.54.84.110.443       ESTABLISHED
+tcp4       0      0  127.0.0.1.64150        *.*                    LISTEN
+
+--- Listening Ports (lsof) ---
+rapportd    431 joelagyeman    8u  IPv4 0xbf8ecdf515cd089f      0t0  TCP *:62412 (LISTEN)
+rapportd    431 joelagyeman    9u  IPv6 0x6b8916f0122cded1      0t0  TCP *:62412 (LISTEN)
+Adobe\x20   682 joelagyeman   35u  IPv4 0x3a806ac0633a1687      0t0  TCP 127.0.0.1:15292 (LISTEN)
+Adobe\x20   682 joelagyeman   47u  IPv4 0xd144a343ec8e926e      0t0  TCP 127.0.0.1:15393 (LISTEN)
+Adobe\x20   682 joelagyeman   51u  IPv4   0x4717677adfd722      0t0  TCP 127.0.0.1:16494 (LISTEN)
+figma_age   779 joelagyeman    6u  IPv4 0x5d9466cfbab30cca      0t0  TCP 127.0.0.1:44950 (LISTEN)
+figma_age   779 joelagyeman   10u  IPv4   0xac235b6edfe2ab      0t0  TCP 127.0.0.1:44960 (LISTEN)
+Antigravi 67309 joelagyeman   32u  IPv4 0xb0b164dfb3c02789      0t0  TCP 127.0.0.1:64022 (LISTEN)
+language_ 67351 joelagyeman    7u  IPv4 0x2973b588f5ee0e10      0t0  TCP 127.0.0.1:64025 (LISTEN)
+language_ 67351 joelagyeman    8u  IPv4 0x3dd005b66a5bbcda      0t0  TCP 127.0.0.1:64026 (LISTEN)
+Electron  67443 joelagyeman   40u  IPv4 0xf23a1bd33f9073f5      0t0  TCP 127.0.0.1:64060 (LISTEN)
+Electron  67443 joelagyeman   41u  IPv4 0x81a520229149019a      0t0  TCP 127.0.0.1:64061 (LISTEN)
+language_ 67503 joelagyeman    6u  IPv4 0x838fee5c420049e3      0t0  TCP 127.0.0.1:64064 (LISTEN)
+language_ 67503 joelagyeman    7u  IPv4 0x98b3d69da78bc782      0t0  TCP 127.0.0.1:64065 (LISTEN)
+Antigravi 67578 joelagyeman   38u  IPv4 0xc36513cc1e416691      0t0  TCP 127.0.0.1:64093 (LISTEN)
+language_ 67999 joelagyeman    6u  IPv4 0x6949f7f637604e5e      0t0  TCP 127.0.0.1:64095 (LISTEN)
+language_ 67999 joelagyeman    7u  IPv4 0x2927ac357d9749f7      0t0  TCP 127.0.0.1:64150 (LISTEN)
+language_ 67999 joelagyeman    8u  IPv4 0x508614e6c32fba72      0t0  TCP 127.0.0.1:64108 (LISTEN)
+
+────────────────────────────────────────
+
+### Firewall & SIP Status
+Firewall: Firewall is enabled. (State = 1)
+SIP: System Integrity Protection status: enabled.
+Gatekeeper: assessments enabled
+FileVault: FileVault is On.
+
+────────────────────────────────────────
+
+### Launch Agents/Daemons
+
+[~/Library/LaunchAgents] (7 items)
+  ai.perplexity.CometUpdater.wake.plist
+  ai.perplexity.keystone.agent.plist
+  ai.perplexity.keystone.xpcservice.plist
+  com.epicgames.launcher.plist
+  com.google.GoogleUpdater.wake.plist
+  com.google.keystone.agent.plist
+  com.google.keystone.xpcservice.plist
+
+[/Library/LaunchAgents] (4 items)
+  com.adobe.AdobeCreativeCloud.plist
+  com.adobe.ccxprocess.plist
+  com.microsoft.update.agent.plist
+  com.microsoft.wdav.tray.plist
+
+[/Library/LaunchDaemons] (9 items)
+  com.adobe.acc.installer.v2.plist
+  com.microsoft.autoupdate.helper.plist
+  com.microsoft.dlp.install_monitor.plist
+  com.microsoft.fresno.plist
+  com.microsoft.fresno.uninstall.plist
+  com.microsoft.wdav.dlp_processor_install_monitor.plist
+  com.microsoft.wdav.tracer_install_monitor.plist
+  com.muse.authservice.plist
+  jp.co.canon.MasterInstaller.plist
+
+[/System/Library/LaunchAgents] (435 items)
+  com.apple.AMPArtworkAgent.plist
+  com.apple.AMPDeviceDiscoveryAgent.plist
+  com.apple.AMPDevicesAgent.plist
+  com.apple.AMPLibraryAgent.plist
+  com.apple.AMPSystemPlayerAgent.plist
+  com.apple.AOSHeartbeat.plist
+  com.apple.AOSPushRelay.plist
+  com.apple.AccessibilityVisualsAgent.plist
+  com.apple.AddressBook.AssistantService.plist
+  com.apple.AddressBook.SourceSync.plist
+  com.apple.AddressBook.abd.plist
+  com.apple.AirPlayUIAgent.plist
+  com.apple.AirPortBaseStationAgent.plist
+  com.apple.AppSSOAgent.plist
+  com.apple.AquaAppearanceHelper.agent.plist
+  com.apple.AskPermissionUI.plist
+  com.apple.AssetCache.agent.plist
+  com.apple.AssetCacheLocatorService.plist
+  com.apple.AssistiveControl.plist
+  com.apple.AuthenticationServicesCore.AuthenticationServicesAgent.plist
+  com.apple.AutoFillPanel.plist
+  com.apple.BTServerAgent.le.plist
+  com.apple.BiomeAgent.plist
+  com.apple.CallHistoryPluginHelper.plist
+  com.apple.CallHistorySyncHelper.plist
+  com.apple.CloudSettingsSyncAgent.plist
+  com.apple.CommCenter-osx.plist
+  com.apple.ContainerMigrationService.plist
+  com.apple.ContextStoreAgent.plist
+  com.apple.CoreAuthentication.agent.plist
+  com.apple.CoreLocationAgent.plist
+  com.apple.CryptoTokenKit.ahp.agent.plist
+  com.apple.DataDetectorsLocalSources.plist
+  com.apple.DiagnosticsReporter.plist
+  com.apple.DictationIM.plist
+  com.apple.DiskArbitrationAgent.plist
+  com.apple.Dock.plist
+  com.apple.DwellControl.plist
+  com.apple.EscrowSecurityAlert.plist
+  com.apple.ExpansionSlotNotification.plist
+  com.apple.FamilyControlsAgent.plist
+  com.apple.FileProvider.plist
+  com.apple.FilesystemUI.plist
+  com.apple.Finder.plist
+  com.apple.FolderActionsDispatcher.plist
+  com.apple.FollowUpUI.plist
+  com.apple.FontRegistryUIAgent.plist
+  com.apple.FontValidator.plist
+  com.apple.FontWorker.plist
+  com.apple.GameController.gamecontrolleragentd.plist
+  com.apple.GamePolicyAgent.plist
+  com.apple.IOUIAgent.plist
+  com.apple.KeyboardAccessAgent.plist
+  com.apple.LinkedNotesUIService.plist
+  com.apple.LocalAuthentication.UIAgent.plist
+  com.apple.MENotificationAgent.plist
+  com.apple.MTLAssetUpgraderD.plist
+  com.apple.ManagedClientAgent.agent.plist
+  com.apple.ManagedClientAgent.enrollagent.plist
+  com.apple.ManagedSettingsAgent.plist
+  com.apple.Maps.mapssyncd.plist
+  com.apple.Maps.pushdaemon.plist
+  com.apple.MemorySlotNotification.plist
+  com.apple.MobileAccessoryUpdater.fudHelperAgent.plist
+  com.apple.ModelCatalogAgent.plist
+  com.apple.NVMeAgent.plist
+  com.apple.NowPlayingTouchUI.plist
+  com.apple.OSDUIHelper.plist
+  com.apple.PIPAgent.plist
+  com.apple.PackageUIKit.InstallStatus.plist
+  com.apple.RapportUIAgent.plist
+  com.apple.RemoteDesktop.plist
+  com.apple.RemoteManagementAgent.plist
+  com.apple.ReportCrash.plist
+  com.apple.ReportGPURestart.plist
+  com.apple.SSInvitationAgent.plist
+  com.apple.Safari.History.plist
+  com.apple.Safari.PasswordBreachAgent.plist
+  com.apple.Safari.SafeBrowsing.Service.plist
+  com.apple.SafariBookmarksSyncAgent.plist
+  com.apple.SafariHistoryServiceAgent.plist
+  com.apple.SafariLaunchAgent.plist
+  com.apple.SafariNotificationAgent.plist
+  com.apple.SafeEjectGPUAgent.plist
+  com.apple.ScreenReaderUIServer.plist
+  com.apple.ScreenTimeAgent.plist
+  com.apple.ScriptMenuApp.plist
+  com.apple.SecureBackupDaemon.plist
+  com.apple.ServicesUIAgent.plist
+  com.apple.Siri.agent.plist
+  com.apple.SiriTTSTrainingAgent.plist
+  com.apple.SoftwareUpdateNotificationManager.plist
+  com.apple.SpacesTouchBarAgent.plist
+  com.apple.Spotlight.plist
+  com.apple.StatusKitAgent.plist
+  com.apple.StorageManagement.Service.plist
+  com.apple.StorageManagementUIHelper.plist
+  com.apple.SystemUIServer.plist
+  com.apple.TMHelperAgent.plist
+  com.apple.TextInputMenuAgent.plist
+  com.apple.TextInputSwitcher.plist
+  com.apple.ThreadCommissionerService.plist
+  com.apple.TrustEvaluationAgent.plist
+  com.apple.USBAgent.plist
+  com.apple.UsageTrackingAgent.plist
+  com.apple.UserEventAgent-Aqua.plist
+  com.apple.UserEventAgent-CryptexContainer.plist
+  com.apple.UserEventAgent-LoginWindow.plist
+  com.apple.UserNotificationCenterAgent-LoginWindow.plist
+  com.apple.UserNotificationCenterAgent.plist
+  com.apple.UserPictureSyncAgent.plist
+  com.apple.VoiceOver.plist
+  com.apple.WindowManager.plist
+  com.apple.accessibility.AXVisualSupportAgent.plist
+  com.apple.accessibility.LiveTranscriptionAgent.plist
+  com.apple.accessibility.MotionTrackingAgent.plist
+  com.apple.accessibility.axassetsd.plist
+  com.apple.accessibility.dfrhud.plist
+  com.apple.accessibility.heard.plist
+  com.apple.accountsd.plist
+  com.apple.akd.plist
+  com.apple.alf.useragent.plist
+  com.apple.amp.mediasharingd.plist
+  com.apple.amsaccountsd.plist
+  com.apple.amsengagementd.plist
+  com.apple.amsondevicestoraged.plist
+  com.apple.analyticsagent.plist
+  com.apple.ap.adprivacyd.plist
+  com.apple.ap.promotedcontentd.plist
+  com.apple.apfsuseragent.plist
+  com.apple.appleaccountd.plist
+  com.apple.appleidsetupd.plist
+  com.apple.appleseed.seedusaged.plist
+  com.apple.appleseed.seedusaged.postinstall.plist
+  com.apple.applespell.plist
+  com.apple.appplaceholdersyncd.plist
+  com.apple.appsleepd.plist
+  com.apple.appstoreagent.plist
+  com.apple.appstorecomponentsd.plist
+  com.apple.askpermissiond.plist
+  com.apple.asktod.plist
+  com.apple.assessmentagent.plist
+  com.apple.assistant_cdmd.plist
+  com.apple.assistant_service.plist
+  com.apple.assistantd.plist
+  com.apple.atsd.useragent.plist
+  com.apple.audio.AudioComponentRegistrar.plist
+  com.apple.avatarsd.plist
+  com.apple.avconferenced.plist
+  com.apple.backgroundassets.user.plist
+  com.apple.backgroundtaskmanagement.agent.plist
+  com.apple.betaenrollmentagent.plist
+  com.apple.biomesyncd.plist
+  com.apple.bird.plist
+  com.apple.bluetoothUIServer.plist
+  com.apple.bluetoothuserd.plist
+  com.apple.bookassetd.plist
+  com.apple.bookdatastored.plist
+  com.apple.btsa.plist
+  com.apple.businessservicesd.plist
+  com.apple.cache_delete.plist
+  com.apple.calaccessd.plist
+  com.apple.calendar.CalendarAgentBookmarkMigrationService.plist
+  com.apple.cdpd.plist
+  com.apple.cfnetwork.AuthBrokerAgent.plist
+  com.apple.cfprefsd.xpc.agent.plist
+  com.apple.chronod.plist
+  com.apple.ciphermld.plist
+  com.apple.ckdiscretionaryd.plist
+  com.apple.cloudd.plist
+  com.apple.cloudpaird.plist
+  com.apple.cloudphotod.plist
+  com.apple.cmfsyncagent.plist
+  com.apple.cmio.ContinuityCaptureAgent.plist
+  com.apple.cmio.LaunchCMIOUserExtensionsAgent.plist
+  com.apple.colorsync.useragent.plist
+  com.apple.commerce.plist
+  com.apple.companiond.plist
+  com.apple.contacts.donation-agent.plist
+  com.apple.contactsd.plist
+  com.apple.containermanagerd.plist
+  com.apple.controlcenter.plist
+  com.apple.controlstrip.plist
+  com.apple.coredatad.plist
+  com.apple.coreimportd.plist
+  com.apple.coreservices.UASharedPasteboardProgressUI.plist
+  com.apple.coreservices.sharedfilelistd.plist
+  com.apple.coreservices.uiagent.plist
+  com.apple.coreservices.useractivityd.plist
+  com.apple.corespeechd.plist
+  com.apple.corespotlightd.plist
+  com.apple.corespotlightservice.plist
+  com.apple.csuseragent.plist
+  com.apple.ctkbind.plist
+  com.apple.ctkd.plist
+  com.apple.cvmsCompAgent3425AMD_x86_64.plist
+  com.apple.cvmsCompAgent3425AMD_x86_64_1.plist
+  com.apple.cvmsCompAgent3600_arm64.plist
+  com.apple.cvmsCompAgent3600_arm64_1.plist
+  com.apple.cvmsCompAgent3600_x86_64.plist
+  com.apple.cvmsCompAgent3600_x86_64_1.plist
+  com.apple.cvmsCompAgent_arm64.plist
+  com.apple.cvmsCompAgent_arm64_1.plist
+  com.apple.cvmsCompAgent_x86_64.plist
+  com.apple.cvmsCompAgent_x86_64_1.plist
+  com.apple.dataaccess.dataaccessd.plist
+  com.apple.devicecheckd.plist
+  com.apple.diagnosticextensionsd.plist
+  com.apple.diagnostics_agent.plist
+  com.apple.diagnosticspushd.plist
+  com.apple.diskspaced.plist
+  com.apple.distnoted.xpc.agent.plist
+  com.apple.dmd.agent.plist
+  com.apple.donotdisturbd.plist
+  com.apple.dprivacyd.plist
+  com.apple.dt.AutomationModeUI.plist
+  com.apple.dt.CommandLineTools.installondemand.plist
+  com.apple.dt.previewsd.plist
+  com.apple.dt.previewsviewservice.plist
+  com.apple.duetexpertd.plist
+  com.apple.email.maild.plist
+  com.apple.ensemble.plist
+  com.apple.exchange.exchangesyncd.plist
+  com.apple.familycircled.plist
+  com.apple.familycontrols.useragent.plist
+  com.apple.familynotificationd.plist
+  com.apple.feedbackd.plist
+  com.apple.financed.plist
+  com.apple.findmy.findmylocateagent.plist
+  com.apple.findmymacmessenger.plist
+  com.apple.followupd.plist
+  com.apple.fontd.useragent.plist
+  com.apple.fskit.fskit_agent.plist
+  com.apple.gamed.plist
+  com.apple.generativeexperiencesd.plist
+  com.apple.geoanalyticsd.plist
+  com.apple.geodMachServiceBridge.plist
+  com.apple.gputoolsserviced.plist
+  com.apple.helpd.plist
+  com.apple.homed.plist
+  com.apple.homeenergyd.plist
+  com.apple.iCloudNotificationAgent.plist
+  com.apple.iCloudUserNotifications.plist
+  com.apple.icdd.plist
+  com.apple.icloud.findmydeviced.findmydevice-user-agent.plist
+  com.apple.icloud.searchpartyuseragent.plist
+  com.apple.icloudmailagent.plist
+  com.apple.iconservices.iconservicesagent.plist
+  com.apple.identityservicesd.plist
+  com.apple.idsremoteurlconnectionagent.plist
+  com.apple.imagent.plist
+  com.apple.imautomatichistorydeletionagent.plist
+  com.apple.imklaunchagent.plist
+  com.apple.imtransferagent.plist
+  com.apple.inputanalyticsd.plist
+  com.apple.installandsetup.migrationhelper.user.plist
+  com.apple.installd.user.plist
+  com.apple.installerauthagent.plist
+  com.apple.intelligencecontextd.plist
+  com.apple.intelligenceflowd.plist
+  com.apple.intelligenceplatformd.plist
+  com.apple.intelligentroutingd.plist
+  com.apple.itunescloudd.plist
+  com.apple.keyboardservicesd.plist
+  com.apple.keychainsharingmessagingd.plist
+  com.apple.knowledge-agent.plist
+  com.apple.knowledgeconstructiond.plist
+  com.apple.languageassetd.plist
+  com.apple.linkd.plist
+  com.apple.localizationswitcherd.plist
+  com.apple.locationaccessstored.plist
+  com.apple.lockdownmoded.plist
+  com.apple.lockoutagent.plist
+  com.apple.loginwindow.LWWeeklyMessageTracer.plist
+  com.apple.lsd.plist
+  com.apple.macos.studentd.plist
+  com.apple.managedappdistributionagent.plist
+  com.apple.managedcorespotlightd.plist
+  com.apple.maps.destinationd.plist
+  com.apple.mbbackgrounduseragent.plist
+  com.apple.mbfloagent.plist
+  com.apple.mbproximityhelper.plist
+  com.apple.mbuseragent.plist
+  com.apple.mdmclient.agent.plist
+  com.apple.mdworker.mail.plist
+  com.apple.mdworker.shared.plist
+  com.apple.mdworker.single.arm64.plist
+  com.apple.mdworker.single.x86_64.plist
+  com.apple.mdworker.sizing.plist
+  com.apple.mediaanalysisd.plist
+  com.apple.mediaremoteagent.plist
+  com.apple.mediastream.mstreamd.plist
+  com.apple.menuextra.battery.helper.plist
+  com.apple.metadata.mdbulkimport.plist
+  com.apple.metadata.mdflagwriter.plist
+  com.apple.metadata.mdwrite.plist
+  com.apple.metrickitd.plist
+  com.apple.midiserver.plist
+  com.apple.milod.plist
+  com.apple.mlhostd.plist
+  com.apple.mlruntimed.plist
+  com.apple.mobiletimerd.plist
+  com.apple.naturallanguaged.plist
+  com.apple.navd.plist
+  com.apple.ndoagent.plist
+  com.apple.neagent.plist
+  com.apple.netauth.user.auth.plist
+  com.apple.netauth.user.gui.plist
+  com.apple.networkserviceproxy-osx.plist
+  com.apple.newsd.plist
+  com.apple.nexusd.plist
+  com.apple.notes.exchangenotesd.plist
+  com.apple.noticeboard.agent.plist
+  com.apple.notificationcenterui.plist
+  com.apple.nsurlsessiond.plist
+  com.apple.parentalcontrols.check.plist
+  com.apple.parsec-fbf.plist
+  com.apple.parsecd.plist
+  com.apple.passd.plist
+  com.apple.pboard.plist
+  com.apple.pbs.plist
+  com.apple.peopled.plist
+  com.apple.photoanalysisd.plist
+  com.apple.photolibraryd.plist
+  com.apple.pluginkit.pkd.plist
+  com.apple.pluginkit.pkreporter.plist
+  com.apple.powerchime.plist
+  com.apple.preference.displays.MirrorDisplays.plist
+  com.apple.previewshellapp.plist
+  com.apple.printtool.agent.plist
+  com.apple.printuitool.agent.plist
+  com.apple.privatecloudcomputed.plist
+  com.apple.proactived.plist
+  com.apple.proactiveeventtrackerd.plist
+  com.apple.progressd.plist
+  com.apple.protectedcloudstorage.protectedcloudkeysyncing.plist
+  com.apple.ptpcamerad.plist
+  com.apple.quicklook.ThumbnailsAgent.plist
+  com.apple.quicklook.plist
+  com.apple.quicklook.ui.helper.plist
+  com.apple.rapportd-user.plist
+  com.apple.rcd.plist
+  com.apple.recentsd.plist
+  com.apple.remindd.plist
+  com.apple.replayd.plist
+  com.apple.replicatord.plist
+  com.apple.reversetemplated.plist
+  com.apple.routined.plist
+  com.apple.scopedbookmarkagent.xpc.plist
+  com.apple.screencaptureui.plist
+  com.apple.screensharing.MessagesAgent.plist
+  com.apple.screensharing.agent.plist
+  com.apple.screensharing.menuextra.plist
+  com.apple.scrod.plist
+  com.apple.secd.plist
+  com.apple.secinitd.plist
+  com.apple.security.DiskUnmountWatcher.plist
+  com.apple.security.KeychainStasher.plist
+  com.apple.security.agent.plist
+  com.apple.security.cloudkeychainproxy3.plist
+  com.apple.security.keychain-circle-notification.plist
+  com.apple.securityuploadd.plist
+  com.apple.seserviced.plist
+  com.apple.sharingd.plist
+  com.apple.shazamd.plist
+  com.apple.sidecar-hid-relay.plist
+  com.apple.sidecar-relay.plist
+  com.apple.siriactionsd.plist
+  com.apple.siriinferenced.plist
+  com.apple.siriknowledged.plist
+  com.apple.sirittsd.plist
+  com.apple.sociallayerd.plist
+  com.apple.speech.speechdatainstallerd.plist
+  com.apple.speech.speechsynthesisd.arm64.plist
+  com.apple.speech.speechsynthesisd.x86_64.plist
+  com.apple.speech.synthesisserver.plist
+  com.apple.spindump_agent.plist
+  com.apple.sportsd.plist
+  com.apple.spotlightknowledged.importer.plist
+  com.apple.spotlightknowledged.plist
+  com.apple.spotlightknowledged.updater.plist
+  com.apple.stickersd.plist
+  com.apple.storeaccountd.plist
+  com.apple.storeassetd.plist
+  com.apple.storedownloadd.plist
+  com.apple.storekitagent.plist
+  com.apple.storelegacy.plist
+  com.apple.storeuid.plist
+  com.apple.suggestd.plist
+  com.apple.swcd.plist
+  com.apple.swtransparencyd.plist
+  com.apple.symptomsd-diag.plist
+  com.apple.synapse.contentlinkingd.plist
+  com.apple.syncdefaultsd.plist
+  com.apple.syncservices.SyncServer.plist
+  com.apple.syncservices.uihandler.plist
+  com.apple.sysdiagnose_agent.plist
+  com.apple.systemprofiler.plist
+  com.apple.systemsettingsagent.plist
+  com.apple.talagent.plist
+  com.apple.tccd.plist
+  com.apple.telephonyutilities.callservicesd.plist
+  com.apple.testmanagerd.plist
+  com.apple.textunderstandingd.plist
+  com.apple.thermaltrap.plist
+  com.apple.timezoneupdates.tznotify.plist
+  com.apple.tipsd.plist
+  com.apple.translationd.plist
+  com.apple.transparencyStaticKey.plist
+  com.apple.transparencyd.plist
+  com.apple.triald.plist
+  com.apple.trustd.agent.plist
+  com.apple.uarppersonalizationd.plist
+  com.apple.uikitsystemapp.plist
+  com.apple.universalaccessAuthWarn.plist
+  com.apple.universalaccesscontrol.plist
+  com.apple.universalaccessd.plist
+  com.apple.unmountassistant.useragent.plist
+  com.apple.usermanagerhelper.plist
+  com.apple.usernoted.plist
+  com.apple.usernotificationsd.plist
+  com.apple.videosubscriptionsd.plist
+  com.apple.voicebankingd.plist
+  com.apple.voicememod.plist
+  com.apple.wallpaper.plist
+  com.apple.warmd_agent.plist
+  com.apple.watchlistd.plist
+  com.apple.weatherd.plist
+  com.apple.webinspectord.plist
+  com.apple.webkit.webpushd.plist
+  com.apple.webprivacyd.plist
+  com.apple.wifi.WiFiAgent.plist
+  com.apple.xpc.loginitemregisterd.plist
+  com.apple.xpc.otherbsd.plist
+  com.openssh.ssh-agent.plist
+
+[/System/Library/LaunchDaemons] (412 items)
+  bootps.plist
+  com.apple.AirPlayXPCHelper.plist
+  com.apple.AppSSOAgent.login.plist
+  com.apple.AppSSODaemon.plist
+  com.apple.AppleCredentialManagerDaemon.plist
+  com.apple.AppleQEMUGuestAgent.plist
+  com.apple.AssetCache.builtin.plist
+  com.apple.AssetCacheLocatorService.plist
+  com.apple.AssetCacheManagerService.plist
+  com.apple.AssetCacheTetheratorService.plist
+  com.apple.BTServer.le.plist
+  com.apple.BlueTool.plist
+  com.apple.CSCSupportd.plist
+  com.apple.ContainerMigrationService.plist
+  com.apple.CoreAuthentication.daemon.plist
+  com.apple.CrashReporterSupportHelper.plist
+  com.apple.CryptoTokenKit.ahp.plist
+  com.apple.DataDetectorsSourceAccess.plist
+  com.apple.DesktopServicesHelper.plist
+  com.apple.DumpGPURestart.plist
+  com.apple.DumpPanic.Accessory.plist
+  com.apple.DumpPanic.plist
+  com.apple.FileCoordination.plist
+  com.apple.GSSCred.plist
+  com.apple.GameController.gamecontrollerd.plist
+  com.apple.IFCStart.plist
+  com.apple.IOAccelMemoryInfoCollector.plist
+  com.apple.InstallerDiagnostics.installerdiagd.plist
+  com.apple.InstallerDiagnostics.installerdiagwatcher.plist
+  com.apple.InstallerProgress.plist
+  com.apple.Kerberos.digest-service.plist
+  com.apple.Kerberos.kadmind.plist
+  com.apple.Kerberos.kcm.plist
+  com.apple.Kerberos.kdc.plist
+  com.apple.Kerberos.kpasswdd.plist
+  com.apple.KernelEventAgent.plist
+  com.apple.ManagedClient.cloudconfigurationd.plist
+  com.apple.ManagedClient.enroll.plist
+  com.apple.ManagedClient.mechanism.plist
+  com.apple.ManagedClient.plist
+  com.apple.ManagedClient.startup.plist
+  com.apple.MobileFileIntegrity.plist
+  com.apple.NetworkLinkConditioner.plist
+  com.apple.NetworkSharing.plist
+  com.apple.ODSAgent.plist
+  com.apple.PasswordService.plist
+  com.apple.PerfPowerServices.plist
+  com.apple.PerfPowerServicesExtended.plist
+  com.apple.PowerUIAgent.plist
+  com.apple.RFBEventHelper.plist
+  com.apple.RemoteDesktop.PrivilegeProxy.plist
+  com.apple.ReportCrash.Root.plist
+  com.apple.ReportMemoryException.plist
+  com.apple.ReportSystemMemory.plist
+  com.apple.SCHelper.plist
+  com.apple.SafeEjectGPUStartupDaemon.plist
+  com.apple.SubmitDiagInfo.plist
+  com.apple.TrustEvaluationAgent.system.plist
+  com.apple.UpdateSettings.plist
+  com.apple.UserEventAgent-System.plist
+  com.apple.UserNotificationCenter.plist
+  com.apple.Virtualization.AppleVirtualPlatformHIDBridge.plist
+  com.apple.WindowServer.plist
+  com.apple.WirelessRadioManager-osx.plist
+  com.apple.accessoryd.plist
+  com.apple.accessoryupdaterd.plist
+  com.apple.adid.plist
+  com.apple.afpfs_afpLoad.plist
+  com.apple.afpfs_checkafp.plist
+  com.apple.airport.wps.plist
+  com.apple.airportd.plist
+  com.apple.akd.plist
+  com.apple.alf.agent.plist
+  com.apple.analyticsd.plist
+  com.apple.aned.plist
+  com.apple.aneuserd.plist
+  com.apple.aonsensed.plist
+  com.apple.apfsd.plist
+  com.apple.appinstalld.plist
+  com.apple.appleh13camerad.plist
+  com.apple.appleh16camerad.plist
+  com.apple.applekeystored.plist
+  com.apple.appleseed.fbahelperd.plist
+  com.apple.applessdstatistics.plist
+  com.apple.appstored.plist
+  com.apple.apsd.plist
+  com.apple.aslmanager.plist
+  com.apple.asr.plist
+  com.apple.atrun.plist
+  com.apple.attentionawarenessd.plist
+  com.apple.audio.AudioComponentRegistrar.daemon.plist
+  com.apple.audio.coreaudiod.plist
+  com.apple.audio.micactivityd.plist
+  com.apple.audio.systemsoundserverd.plist
+  com.apple.audioanalyticsd.plist
+  com.apple.audiomxd.plist
+  com.apple.auditd.plist
+  com.apple.autofsd.plist
+  com.apple.automountd.plist
+  com.apple.avbdeviced.plist
+  com.apple.awdd.plist
+  com.apple.backgroundtaskmanagementd.plist
+  com.apple.backupd-helper.plist
+  com.apple.backupd.plist
+  com.apple.betaenrollmentd.plist
+  com.apple.biomed.plist
+  com.apple.biometrickitd.plist
+  com.apple.bluetoothd.plist
+  com.apple.bluetoothuiservice.plist
+  com.apple.bootinstalld.plist
+  com.apple.bosreporter.plist
+  com.apple.boswatcher.plist
+  com.apple.bridgeOSUpdateProxy.plist
+  com.apple.bsd.dirhelper.plist
+  com.apple.cameracaptured.plist
+  com.apple.captiveagent.plist
+  com.apple.cfnetwork.cfnetworkagent.plist
+  com.apple.cfprefsd.xpc.daemon.plist
+  com.apple.cloudd.plist
+  com.apple.cmio.AVCAssistant.plist
+  com.apple.cmio.IIDCVideoAssistant.plist
+  com.apple.cmio.VDCAssistant.plist
+  com.apple.cmio.iOSScreenCaptureAssistant.plist
+  com.apple.cmio.registerassistantservice.plist
+  com.apple.cmio.uvcassistantextension.plist
+  com.apple.colorsync.displayservices.plist
+  com.apple.colorsyncd.plist
+  com.apple.configd.plist
+  com.apple.configureLocalKDC.plist
+  com.apple.containermanagerd.system.plist
+  com.apple.contextstored.plist
+  com.apple.corebrightnessd.plist
+  com.apple.corecaptured.plist
+  com.apple.coreduetd.plist
+  com.apple.corekdld.plist
+  com.apple.corercd.plist
+  com.apple.coreservices.appleevents.plist
+  com.apple.coreservices.launchservicesd.plist
+  com.apple.coreservices.sharedfilelistd.plist
+  com.apple.coreservicesd.plist
+  com.apple.corespeechd.system.plist
+  com.apple.corestorage.corestoraged.plist
+  com.apple.corestorage.corestoragehelperd.plist
+  com.apple.coresymbolicationd.plist
+  com.apple.countryd.plist
+  com.apple.csrutil.report.plist
+  com.apple.ctkd.plist
+  com.apple.cvmsServ.plist
+  com.apple.dasd-OSX.plist
+  com.apple.datastored.plist
+  com.apple.deleted_helper.plist
+  com.apple.devicemanagementclient.managedeventsd.plist
+  com.apple.devicemanagementclient.teslad.plist
+  com.apple.dhcp6d.plist
+  com.apple.diagnosticd.plist
+  com.apple.diagnosticextensions.osx.spotlight.helper.plist
+  com.apple.diagnosticextensions.osx.timemachine.helper.plist
+  com.apple.diagnosticservicesd.plist
+  com.apple.diskarbitrationd.plist
+  com.apple.diskimagesiod.plist
+  com.apple.diskimagesiod.ram.plist
+  com.apple.diskimagesiod.spb.plist
+  com.apple.diskmanagementstartup.plist
+  com.apple.displaypolicyd.plist
+  com.apple.distnoted.xpc.daemon.plist
+  com.apple.doubleagentd.plist
+  com.apple.dpdkswitchd.plist
+  com.apple.dprivacyd.plist
+  com.apple.dspluginhelperd.plist
+  com.apple.dt.automationmode-writer.plist
+  com.apple.dt.fetchsymbolsd.plist
+  com.apple.dvdplayback.setregion.plist
+  com.apple.dynamic_pager.plist
+  com.apple.eapolcfg_auth.plist
+  com.apple.ecosystemanalyticsd.plist
+  com.apple.efilogin-helper.plist
+  com.apple.eligibilityd.plist
+  com.apple.endpointsecurity.endpointsecurityd.plist
+  com.apple.eoshostd.plist
+  com.apple.eppc.plist
+  com.apple.erasecontentsettingshelperd.plist
+  com.apple.fairplayd.plist
+  com.apple.fairplaydeviceidentityd.plist
+  com.apple.familycontrols.plist
+  com.apple.filesystems.fskitd.plist
+  com.apple.filesystems.userfs_helper.plist
+  com.apple.filesystems.userfsd.plist
+  com.apple.findmy.findmybeaconingd.plist
+  com.apple.findmymac.plist
+  com.apple.findmymacmessenger.plist
+  com.apple.firmwaresyncd.plist
+  com.apple.fontmover.plist
+  com.apple.fseventsd.plist
+  com.apple.fskit.fskit_helper.plist
+  com.apple.ftp-proxy.plist
+  com.apple.gamepolicyd.plist
+  com.apple.getty.plist
+  com.apple.gkreport.plist
+  com.apple.griddatad.plist
+  com.apple.gssd.plist
+  com.apple.handwritingd.plist
+  com.apple.hdiejectd.plist
+  com.apple.hidd.plist
+  com.apple.historicalaudiod.plist
+  com.apple.icloud.findmydeviced.plist
+  com.apple.icloud.searchpartyd.plist
+  com.apple.iconservices.iconservicesagent.plist
+  com.apple.iconservices.iconservicesd.plist
+  com.apple.idleassetsd.plist
+  com.apple.ifdreader.plist
+  com.apple.installandsetup.systemmigrationd.plist
+  com.apple.installcoordination_proxy.plist
+  com.apple.installcoordinationd.plist
+  com.apple.installd.plist
+  com.apple.iomfb_bics_daemon.plist
+  com.apple.iomfb_fdr_loader.plist
+  com.apple.ionodecache.plist
+  com.apple.ioupsd.plist
+  com.apple.jetsamproperties.Mac.plist
+  com.apple.kcgend.plist
+  com.apple.kcproxy.plist
+  com.apple.kdumpd.plist
+  com.apple.kernelmanager_helper.plist
+  com.apple.kernelmanagerd.plist
+  com.apple.kuncd.plist
+  com.apple.lightsoutmanagementd.plist
+  com.apple.liquiddetectiond.plist
+  com.apple.locate.plist
+  com.apple.locationd.plist
+  com.apple.lockd.plist
+  com.apple.logd.plist
+  com.apple.logd_helper.plist
+  com.apple.logd_reporter.plist
+  com.apple.logind.plist
+  com.apple.loginwindow.plist
+  com.apple.logkextloadsd.plist
+  com.apple.lsd.plist
+  com.apple.lskdd.plist
+  com.apple.mDNSResponder.plist
+  com.apple.mDNSResponderHelper.plist
+  com.apple.managedappdistributiond.plist
+  com.apple.mbsystemadministration.plist
+  com.apple.mbusertrampoline.plist
+  com.apple.mdmclient.daemon.plist
+  com.apple.mdmclient.daemon.runatboot.plist
+  com.apple.mediaremoted.plist
+  com.apple.memory-maintenance.plist
+  com.apple.memoryanalyticsd.plist
+  com.apple.metadata.mds.index.plist
+  com.apple.metadata.mds.plist
+  com.apple.metadata.mds.scan.plist
+  com.apple.metadata.mds.spindump.plist
+  com.apple.misagent.plist
+  com.apple.mobile.NRDUpdated.plist
+  com.apple.mobile.keybagd.plist
+  com.apple.mobile.notification_proxy.plist
+  com.apple.mobile.obliteration.plist
+  com.apple.mobile.softwareupdated.plist
+  com.apple.mobile.storage_mounter.plist
+  com.apple.mobile.storage_mounter_proxy.plist
+  com.apple.mobile.usermanagerd.plist
+  com.apple.mobileactivationd.plist
+  com.apple.mobileassetd.plist
+  com.apple.mobilegestalt.xpc.plist
+  com.apple.modelcatalogd.plist
+  com.apple.modelmanagerd.plist
+  com.apple.msrpc.echosvc.plist
+  com.apple.msrpc.lsarpc.plist
+  com.apple.msrpc.mdssvc.plist
+  com.apple.msrpc.netlogon.plist
+  com.apple.msrpc.srvsvc.plist
+  com.apple.msrpc.wkssvc.plist
+  com.apple.multiversed.plist
+  com.apple.nand.aspcarry.plist
+  com.apple.nand_task_scheduler.plist
+  com.apple.nearbyd.plist
+  com.apple.nehelper.plist
+  com.apple.nesessionmanager.plist
+  com.apple.netauth.sys.auth.plist
+  com.apple.netauth.sys.gui.plist
+  com.apple.netbiosd.plist
+  com.apple.newsyslog.plist
+  com.apple.nfcd.plist
+  com.apple.nfsconf.plist
+  com.apple.nfsd.plist
+  com.apple.noticeboard.state.plist
+  com.apple.notifyd.plist
+  com.apple.nsurlsessiond.plist
+  com.apple.oahd-root-helper.plist
+  com.apple.oahd.plist
+  com.apple.ocspd.plist
+  com.apple.odproxyd.plist
+  com.apple.online-authd.xpc.plist
+  com.apple.opendirectoryd.plist
+  com.apple.osanalytics.osanalyticshelper.plist
+  com.apple.ospredictiond.plist
+  com.apple.pcapd.plist
+  com.apple.pfctl.plist
+  com.apple.pfd.plist
+  com.apple.postfix.master.plist
+  com.apple.postfix.newaliases.plist
+  com.apple.postupgraded.plist
+  com.apple.powerd.plist
+  com.apple.powerd.swd.plist
+  com.apple.powerdatad.plist
+  com.apple.powerexperienced.plist
+  com.apple.powerlogHelperd.plist
+  com.apple.preferences.timezone.admintool.plist
+  com.apple.printtool.daemon.plist
+  com.apple.racoon.plist
+  com.apple.rapportd.plist
+  com.apple.relatived.plist
+  com.apple.remoted.plist
+  com.apple.remotemanagementd.plist
+  com.apple.remotepairtool.plist
+  com.apple.retimerd.plist
+  com.apple.revisiond.plist
+  com.apple.rpcbind.plist
+  com.apple.rtcreportingd.plist
+  com.apple.runningboardd.plist
+  com.apple.sandboxd.plist
+  com.apple.screensharing.plist
+  com.apple.scsid.plist
+  com.apple.secinitd.plist
+  com.apple.security.FDERecoveryAgent.plist
+  com.apple.security.agent.login.plist
+  com.apple.security.authhost.plist
+  com.apple.security.authtrampoline.plist
+  com.apple.security.cryptexd.plist
+  com.apple.security.syspolicy.plist
+  com.apple.securityd.plist
+  com.apple.securityd.system.plist
+  com.apple.seld.plist
+  com.apple.sessionlogoutd.plist
+  com.apple.signpost.signpost_reporter.plist
+  com.apple.smb.preferences.plist
+  com.apple.smbd.plist
+  com.apple.sntpd.plist
+  com.apple.softwareupdate_firstrun_tasks.plist
+  com.apple.softwareupdated.plist
+  com.apple.spindump.plist
+  com.apple.srp-mdns-proxy.plist
+  com.apple.startupdiskhelper.plist
+  com.apple.statd.notify.plist
+  com.apple.storagekitd.plist
+  com.apple.storereceiptinstaller.plist
+  com.apple.suhelperd.plist
+  com.apple.symptomsd-diag.plist
+  com.apple.symptomsd.plist
+  com.apple.sysdiagnose.darwinos.plist
+  com.apple.sysdiagnose.plist
+  com.apple.sysdiagnose_helper.plist
+  com.apple.sysextd.plist
+  com.apple.syslogd.plist
+  com.apple.sysmond.plist
+  com.apple.system_installd.plist
+  com.apple.systemkeychain.plist
+  com.apple.systemstats.analysis.plist
+  com.apple.systemstats.daily.plist
+  com.apple.systemstats.microstackshot_periodic.plist
+  com.apple.systemstatusd.plist
+  com.apple.tailspind.plist
+  com.apple.taskgated-helper.plist
+  com.apple.taskgated.plist
+  com.apple.tccd.system.plist
+  com.apple.testmanagerd.plist
+  com.apple.thermald.plist
+  com.apple.thermalmonitord.plist
+  com.apple.threadradiod.plist
+  com.apple.timed.plist
+  com.apple.timesync.audioclocksyncd.plist
+  com.apple.timezoneupdates.tzd.plist
+  com.apple.tmp_cleaner.plist
+  com.apple.touchbarserver.plist
+  com.apple.tracd.plist
+  com.apple.triald.system.plist
+  com.apple.trustd.plist
+  com.apple.trustdFileHelper.plist
+  com.apple.tzlinkd.plist
+  com.apple.ucupdate.plist
+  com.apple.uninstalld.plist
+  com.apple.unmountassistant.sysagent.plist
+  com.apple.usbaudiod.plist
+  com.apple.usbctelemetryd.plist
+  com.apple.usbd.plist
+  com.apple.usbsmartcardreaderd.plist
+  com.apple.uucp.plist
+  com.apple.vsdbutil.plist
+  com.apple.wallpaper.export.plist
+  com.apple.warmd.plist
+  com.apple.watchdogd.plist
+  com.apple.wifiFirmwareLoader.plist
+  com.apple.wifianalyticsd.plist
+  com.apple.wifip2pd.plist
+  com.apple.wifivelocityd.plist
+  com.apple.xartstorageremoted.plist
+  com.apple.xpc.roleaccountd.plist
+  com.apple.xpc.smd.plist
+  com.apple.xpc.uscwoap.plist
+  com.apple.xsan.plist
+  com.apple.xscertadmin.plist
+  com.apple.xscertd-helper.plist
+  com.apple.xscertd.plist
+  com.vix.cron.plist
+  ntalk.plist
+  org.apache.httpd.plist
+  org.cups.cups-lpd.plist
+  org.cups.cupsd.plist
+  org.net-snmp.snmpd.plist
+  org.openldap.slapd.plist
+  ssh.plist
+  tftp.plist
+
+────────────────────────────────────────
+
+### Login & Startup Items
+--- Background Items (sfltool) ---
+(not available)
+
+--- launchctl list ---
+PID	Status	Label
+-	0	com.apple.SafariHistoryServiceAgent
+68291	-9	com.apple.progressd
+68354	-9	com.apple.cloudphotod
+66638	-9	com.apple.MENotificationService
+58764	0	com.microsoft.wdav.tray
+450	0	com.apple.Finder
+13962	-9	com.apple.homed
+68289	-9	com.apple.dataaccess.dataaccessd
+-	-9	com.apple.SafeEjectGPUAgent
+-	0	com.apple.quicklook
+-	0	com.apple.parentalcontrols.check
+530	0	com.apple.mediaremoteagent
+420	0	com.apple.FontWorker
+68572	0	com.apple.bird
+-	0	com.apple.amp.mediasharingd
+-	-9	com.apple.knowledgeconstructiond
+68414	-9	com.apple.inputanalyticsd
+-	0	com.apple.familycontrols.useragent
+-	0	com.apple.AssetCache.agent
+69194	0	com.apple.GameController.gamecontrolleragentd
+-	0	com.apple.universalaccessAuthWarn
+-	-9	com.apple.UserPictureSyncAgent
+439	0	com.apple.nsurlsessiond
+-	-9	com.apple.devicecheckd
+738	0	application.com.adobe.accmac.24842598.24842604
+-	0	com.apple.syncservices.uihandler
+56541	-9	com.apple.iconservices.iconservicesagent
+-	-9	com.apple.diagnosticextensionsd
+-	-9	com.apple.intelligenceplatformd
+56216	-9	com.apple.SafariBookmarksSyncAgent
+-	0	com.apple.cmio.LaunchCMIOUserExtensionsAgent
+66679	-9	com.apple.LinkedNotesUIService
+69201	-9	com.apple.ndoagent
+482	0	com.apple.wallpaper.agent
+-	0	com.apple.bookassetd
+-	0	com.apple.ManagedClientAgent.agent
+-	-9	com.apple.localizationswitcherd
+-	0	com.apple.screensharing.agent
+646	0	com.apple.commerce
+
+--- Launch Services login-related ---
+bindings:                   .bash, .bash_login, .bash_logout, .bash_profile, .bashrc, .profile, .rhistory, .rprofile, .sh, .zlogin, .zlogout, .zprofile, .zsh, .zshenv, .zshrc, 'TEXT', 'utxt', 'TUTX', '****'
+                                "com.apple.private.logind.spi" = 1;
+library items:              LaunchAgents/com.adobe.CCLibrary.plist
+                                    "com.apple.loginwindow"
+                                LSLaunchDLabel = "com.apple.KeyboardAccessAgent";
+                                    "com.apple.loginwindow"
+library items:              LoginItems/CanonIJExtendedSurveyLaunchAgent.app/
+                                LSLaunchDLabel = "com.apple.SystemUIServer.agent";
+library items:              LoginItems/CIJSUAgent.app/
+path:                       /Applications/Canon Utilities/IJ Scan Utility/Canon IJ Scan Utility2.app/Contents/Library/LoginItems/CIJSUAgent.app (0x2cdf8)
+path:                       /Users/joelagyeman/Library/Application Support/Spotify/PersistentCache/Update/temp/Spotify.app/Contents/Library/LoginItems/StartUpHelper.app (0x14a7c)
+library items:              LoginItems/CIJSULAgent.app/
+path:                       /Applications/Canon Utilities/IJ Scan Utility/Canon IJ Scan Utility Lite.app/Contents/Library/LoginItems/CIJSULAgent.app (0x2ce10)
+library items:              LoginItems/PasswordsMenuBarExtra.app/
+bundle id:                  CanonIJExtendedSurveyLaunchAgent (0xa9f0)
+path:                       /Applications/Canon Utilities/Inkjet Extended Survey Program/Inkjet Extended Survey Program.app/Contents/MacOS/ESPController.app/Contents/Library/LoginItems/CanonIJExtendedSurveyLaunchAgent.app (0x2ceac)
+name:                       CanonIJExtendedSurveyLaunchAgent
+localizedShortNames:        "en" = ?, "LSDefaultLocalizedValue" = "CanonIJExtendedSurveyLaunchAgent"
+identifier:                 jp.co.canon.ij.pesp.esplaunchagent
+executable:                 Contents/MacOS/CanonIJExtendedSurveyLaunchAgent
+
+────────────────────────────────────────
+
+### Crontabs
+--- User Crontab ---
+(empty)
+
+--- /etc/crontab ---
+(empty/not found)
+
+────────────────────────────────────────
+
+### DNS Configuration
+--- DNS Resolvers ---
+DNS configuration
+
+resolver #1
+  search domain[0] : mynet
+  nameserver[0] : 192.168.1.1
+  nameserver[1] : fd83:4565:51af:0:6620:9fff:fe12:946
+  nameserver[2] : 2a01:4b00:87fa:e500:6620:9fff:fe12:946
+  if_index : 7 (en1)
+  flags    : Request A records, Request AAAA records
+  reach    : 0x00020002 (Reachable,Directly Reachable Address)
+
+resolver #2
+  domain   : local
+  options  : mdns
+  timeout  : 5
+  flags    : Request A records, Request AAAA records
+  reach    : 0x00000000 (Not Reachable)
+  order    : 300000
+
+resolver #3
+  domain   : 254.169.in-addr.arpa
+  options  : mdns
+  timeout  : 5
+  flags    : Request A records, Request AAAA records
+  reach    : 0x00000000 (Not Reachable)
+  order    : 300200
+
+resolver #4
+  domain   : 8.e.f.ip6.arpa
+  options  : mdns
+  timeout  : 5
+  flags    : Request A records, Request AAAA records
+  reach    : 0x00000000 (Not Reachable)
+  order    : 300400
+
+resolver #5
+  domain   : 9.e.f.ip6.arpa
+  options  : mdns
+  timeout  : 5
+  flags    : Request A records, Request AAAA records
+
+/etc/hosts last modified: Apr 17 13:41:06 2026
+Custom host entries:
+255.255.255.255	broadcasthost
+
+────────────────────────────────────────
+
+### Browser Extensions
+Chrome Extensions (7 installed): ghbmnnjooekpmoecnnnilnnbdlolhkhi, Temp, ojplelelocihfchkdaebocpankipadmp, nkbihfbeogaeaoehlefnkodbefgpgknn, nbhfcmbdimdbbclfngkjfmgmjhnkjocl, nmmhkkegccagdldgiimedpiccmgmieda, kbfnbcaeplbcioakkpcpgfkobkghlhen
+
+────────────────────────────────────────
+
+### Recent Installs & Apps
+--- Recently Modified /Applications ---
+total 0
+drwxr-xr-x   9 root         wheel  288 Aug  5 00:07 Utilities
+drwxr-xr-x@  3 root         wheel   96 Aug  4 22:55 Microsoft Defender.app
+drwxr-xr-x@  3 root         wheel   96 Aug  1 00:01 WhatsApp.app
+drwxr-xr-x@  3 root         wheel   96 Aug  1 00:00 NordVPN.app
+drwxr-xr-x@  3 joelagyeman  staff   96 Jul 30 20:35 Antigravity.app
+drwxrwxr-x@  3 root         wheel   96 Jul 29 13:22 Microsoft Outlook.app
+drwxrwxr-x@  3 root         wheel   96 Jul 29 12:53 Microsoft PowerPoint.app
+drwxrwxr-x@  3 root         wheel   96 Jul 29 12:48 Microsoft Word.app
+drwxrwxr-x@  3 root         wheel   96 Jul 29 11:56 Microsoft Excel.app
+drwxrwxr-x@  3 root         wheel   96 Jul 29 11:54 Microsoft OneNote.app
+drwxr-xr-x@ 11 root         wheel  352 Jul 29 11:46 Adobe Illustrator 2026
+drwxr-xr-x@  3 root         wheel   96 Jul 27 22:55 OneDrive.app
+drwxr-xr-x@  3 root         wheel   96 Jul 27 22:55 Free VPN.app
+drwxr-xr-x@  3 root         wheel   96 Jul 23 16:43 CleanMyMac_5_MAS.app
+
+--- Homebrew Packages ---
+(brew not installed or empty)
+
+────────────────────────────────────────
+
+### User Accounts & Logins
+--- Local Users ---
+joelagyeman
+michaelagyeman
+
+--- Admin Group ---
+GroupMembership: root joelagyeman
+
+--- Recent Logins ---
+joelagyeman ttys004                         Tue Aug  4 22:51 - 22:51  (00:00)
+joelagyeman ttys001                         Tue Aug  4 21:34 - 21:34  (00:00)
+joelagyeman ttys000                         Tue Aug  4 21:16 - 21:16  (00:00)
+joelagyeman console                         Fri Jul 31 21:44   still logged in
+reboot time                                Fri Jul 31 21:44
+
+────────────────────────────────────────
+

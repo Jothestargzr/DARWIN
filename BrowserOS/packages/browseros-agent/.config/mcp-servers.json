@@ -1,0 +1,9 @@
+{
+  "mcpServers": {
+    "darwin-mcp": {
+      "command": "/Users/joelagyeman/Library/Mobile Documents/com~apple~CloudDocs/Darwin/Core/CPP/darwin_mcp",
+      "args": [],
+      "env": {}
+    }
+  }
+}

@@ -1,0 +1,44 @@
+name: Build DARWIN OS (Cloud Compiler)
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [ main, master ]
+
+jobs:
+  build-darwin-os:
+    runs-on: macos-latest
+    steps:
+      - name: Checkout DARWIN Repository
+        uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Install Build System
+        run: |
+          cd BrowserOS/packages/browseros
+          pip install -e .
+
+      - name: Fetch Chromium Source (Shallow)
+        run: |
+          cd BrowserOS/packages/browseros
+          python3 -m bos_build source ensure --root /tmp/chromium
+
+      - name: Apply DARWIN C++ Patches
+        run: |
+          cd BrowserOS/packages/browseros
+          python3 -m bos_build dev apply
+
+      - name: Compile DARWIN OS Binary
+        run: |
+          cd BrowserOS/packages/browseros
+          python3 -m bos_build build
+
+      - name: Upload DARWIN OS Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: DARWIN_OS_v1.0_macOS
+          path: BrowserOS/packages/browseros/out/Default/*.dmg

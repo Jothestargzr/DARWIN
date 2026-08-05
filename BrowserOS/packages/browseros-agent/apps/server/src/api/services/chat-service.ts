@@ -1,0 +1,493 @@
+/**
+ * @license
+ * Copyright 2025 BrowserOS
+ * SPDX-License-Identifier: AGPL-3.0-or-later
+ */
+
+import type { Browser } from '@browseros/browser-core/browser'
+import type { BrowserSession } from '@browseros/browser-core/core/session'
+import { createBrowserOutputFileAccess } from '@browseros/browser-mcp/output-file'
+import { createAgentUIStreamResponse, type UIMessage } from 'ai'
+import { isAcpProvider } from '../../agent/acp-providers'
+import { AiSdkAgent } from '../../agent/ai-sdk-agent'
+import { formatUserMessage } from '../../agent/format-message'
+import {
+  filterValidMessages,
+  sanitizeMessagesForToolset,
+} from '../../agent/message-validation'
+import type { AgentSession, SessionStore } from '../../agent/session-store'
+import type { ResolvedAgentConfig } from '../../agent/types'
+import { buildAcpMcpServers } from '../../lib/agents/acpx-provider/buildAcpMcpServers'
+import { resolveLLMConfig } from '../../lib/clients/llm/config'
+import { logger } from '../../lib/logger'
+import type { KlavisService } from '../services/klavis'
+import type { ServerActivity } from '../services/server-activity'
+import type { BrowserContext, ChatRequest } from '../types'
+import { resolveBrowserContextPageIds } from '../utils/resolve-browser-context-page-ids'
+import {
+  describeMcpChange,
+  describeModeChange,
+  describeWorkspaceChange,
+} from './chat-service.helpers'
+
+export interface ChatServiceDeps {
+  sessionStore: SessionStore
+  klavis?: KlavisService
+  browser: Browser
+  browserSession: BrowserSession
+  browserosId?: string
+  aiSdkDevtoolsEnabled?: boolean
+  /** Port the BrowserOS server bound to. Forwarded into the ACP MCP
+   *  bridge so the spawned agent can dial back into /mcp. */
+  serverPort: number
+  /** BrowserOS resources directory. Threaded into ACP-backed config
+   *  resolutions so the bundled-Bun launcher under
+   *  <resourcesDir>/bin/third_party/bun can be located. */
+  resourcesDir?: string | null
+  activity?: ServerActivity
+}
+
+export class ChatService {
+  constructor(private deps: ChatServiceDeps) {}
+
+  // biome-ignore lint/complexity/noExcessiveCognitiveComplexity: chat request orchestration; refactor tracked separately
+  async processMessage(
+    request: ChatRequest,
+    abortSignal: AbortSignal,
+  ): Promise<Response> {
+    const { sessionStore } = this.deps
+
+    const llmConfig = await resolveLLMConfig(request, this.deps.browserosId)
+
+    // Look up the session first so we can stamp isNewConversation onto
+    // agentConfig before it flows down into the ACP factory (which uses
+    // the flag to decide whether to refresh the workspace instruction
+    // file). The original isNewSession flag below stays as-is for the
+    // rest of the chat-service logic.
+    let session = sessionStore.get(request.conversationId)
+    const isFirstTurn = !session
+
+    const agentConfig: ResolvedAgentConfig = {
+      conversationId: request.conversationId,
+      provider: llmConfig.provider,
+      providerId: llmConfig.providerId,
+      model: llmConfig.model,
+      apiKey: llmConfig.apiKey,
+      baseUrl: llmConfig.baseUrl,
+      upstreamProvider: llmConfig.upstreamProvider,
+      resourceName: llmConfig.resourceName,
+      region: llmConfig.region,
+      accessKeyId: llmConfig.accessKeyId,
+      secretAccessKey: llmConfig.secretAccessKey,
+      sessionToken: llmConfig.sessionToken,
+      accountId: llmConfig.accountId,
+      reasoningEffort: request.reasoningEffort,
+      reasoningSummary: request.reasoningSummary,
+      contextWindowSize: request.contextWindowSize,
+      userSystemPrompt: request.userSystemPrompt,
+      workingDir: request.userWorkingDir,
+      supportsImages: request.supportsImages,
+      // ACP conversations are always agent mode: read-only chat mode is not
+      // enforced for those providers, so the mode toggle is ignored for them.
+      // Pinning chatMode to false keeps the on-disk instruction file and every
+      // (re)built in-band prompt in agent mode, so no request or rebuild can
+      // put an ACP agent into a chat-mode prompt that contradicts it.
+      chatMode: isAcpProvider(llmConfig.provider)
+        ? false
+        : request.mode === 'chat',
+      isScheduledTask: request.isScheduledTask,
+      origin: request.origin,
+      declinedApps: request.declinedApps,
+      browserosId: this.deps.browserosId,
+      acpAgentId: request.acpAgentId,
+      acpCommand: request.acpCommand,
+      acpFixedWorkspacePath: request.acpFixedWorkspacePath,
+      acpMcpServers: isAcpProvider(llmConfig.provider)
+        ? buildAcpMcpServers({
+            serverPort: this.deps.serverPort,
+            conversationId: request.conversationId,
+            providerId: llmConfig.provider,
+            defaultWindowId: request.browserContext?.windowId,
+            enabledMcpServers: request.browserContext?.enabledMcpServers,
+            customMcpServers: request.browserContext?.customMcpServers,
+          })
+        : undefined,
+      isNewConversation: isFirstTurn,
+      resourcesDir: this.deps.resourcesDir,
+    }
+
+    let isNewSession = false
+    const contextChanges: string[] = []
+
+    // Build stable keys for change detection
+    const mcpServerKey = this.buildMcpServerKey(request.browserContext)
+
+    // Snapshot the inputs the cached session was built with, before any
+    // rebuild. rebuildSession restamps these, so both change detection and the
+    // notices below must read from this snapshot, not from the (possibly
+    // rebuilt) session.
+    const requestChatMode = agentConfig.chatMode ?? false
+    const prior = session && {
+      mcpServerKey: session.mcpServerKey,
+      workingDir: session.workingDir,
+      chatMode: session.chatMode,
+    }
+
+    const mcpChanged = !!prior && prior.mcpServerKey !== mcpServerKey
+    const workspaceChanged =
+      !!prior && prior.workingDir !== request.userWorkingDir
+    // ACP is excluded: a rebuild cannot deliver a mode change to those agents,
+    // because their instructions live in the workspace instruction file and
+    // ensureWorkspaceInstructionFile() skips whenever isNewConversation is
+    // false - which it is on every rebuild. Rebuilding would leave a fresh
+    // in-band prompt contradicting the stale on-disk block.
+    const modeChanged =
+      !!prior &&
+      !isAcpProvider(llmConfig.provider) &&
+      prior.chatMode !== requestChatMode
+
+    // One rebuild reflects every change, because rebuildSession reads the
+    // current agentConfig, mcpServerKey, and request. Switching to chat mode
+    // drops the agent's record of tool calls it already made
+    // (sanitizeMessagesForToolset removes parts the narrower toolset lacks) and
+    // switching back does not restore them.
+    if (session && (mcpChanged || workspaceChanged || modeChanged)) {
+      logger.info('Rebuilding session for mid-conversation input changes', {
+        conversationId: request.conversationId,
+        mcpChanged,
+        workspaceChanged,
+        modeChanged,
+      })
+      session = await this.rebuildSession(
+        session,
+        request,
+        agentConfig,
+        mcpServerKey,
+      )
+    }
+
+    // Emit one notice per change, reading pre-rebuild values from `prior`.
+    // Independent of how many rebuilds ran (at most one), so a turn that
+    // changes several inputs still tells the model about each of them.
+    if (mcpChanged && prior) {
+      contextChanges.push(describeMcpChange(prior.mcpServerKey, mcpServerKey))
+    }
+    if (workspaceChanged && prior) {
+      contextChanges.push(
+        describeWorkspaceChange(
+          prior.workingDir,
+          request.userWorkingDir,
+          requestChatMode,
+        ),
+      )
+    }
+    if (modeChanged) {
+      contextChanges.push(
+        describeModeChange(requestChatMode, !!request.userWorkingDir),
+      )
+    }
+
+    if (!session) {
+      isNewSession = true
+      let scheduledPageId: number | undefined
+      let browserContext = await resolveBrowserContextPageIds(
+        this.deps.browser,
+        request.browserContext,
+      )
+      if (request.isScheduledTask) {
+        try {
+          scheduledPageId = await this.deps.browser.newPage('about:blank', {
+            background: true,
+          })
+          let scheduledWindowId: number | undefined
+          try {
+            const scheduledPage = (await this.deps.browser.listPages()).find(
+              (page) => page.pageId === scheduledPageId,
+            )
+            scheduledWindowId = scheduledPage?.windowId
+          } catch (error) {
+            logger.warn('Failed to look up scheduled page metadata', {
+              conversationId: request.conversationId,
+              pageId: scheduledPageId,
+              error: error instanceof Error ? error.message : String(error),
+            })
+          }
+          browserContext = {
+            ...browserContext,
+            windowId: scheduledWindowId,
+            selectedTabs: undefined,
+            tabs: undefined,
+            activeTab: {
+              id: scheduledPageId,
+              pageId: scheduledPageId,
+              url: 'about:blank',
+              title: 'Scheduled Task',
+            },
+          }
+          logger.info('Created background page for scheduled task', {
+            conversationId: request.conversationId,
+            pageId: scheduledPageId,
+            windowId: scheduledWindowId,
+          })
+        } catch (error) {
+          logger.warn(
+            'Failed to create scheduled page, using default browser context',
+            {
+              error: error instanceof Error ? error.message : String(error),
+            },
+          )
+        }
+      }
+
+      const outputFileAccess = createBrowserOutputFileAccess()
+      const agent = await AiSdkAgent.create({
+        resolvedConfig: agentConfig,
+        browserSession: this.deps.browserSession,
+        browserContext,
+        klavis: this.deps.klavis,
+        browserosId: this.deps.browserosId,
+        aiSdkDevtoolsEnabled: this.deps.aiSdkDevtoolsEnabled,
+        outputFileAccess,
+      })
+      session = {
+        agent,
+        scheduledPageId,
+        browserContext,
+        mcpServerKey,
+        workingDir: request.userWorkingDir,
+        chatMode: requestChatMode,
+        outputFileAccess,
+      }
+      sessionStore.set(request.conversationId, session)
+    }
+
+    if (isNewSession && request.previousConversation?.length) {
+      for (const msg of request.previousConversation) {
+        if (!msg.content.trim()) continue
+        session.agent.messages.push({
+          id: crypto.randomUUID(),
+          role: msg.role === 'assistant' ? 'assistant' : 'user',
+          parts: [{ type: 'text', text: msg.content }],
+        })
+      }
+      logger.info('Injected previous conversation history', {
+        conversationId: request.conversationId,
+        messageCount: request.previousConversation.length,
+      })
+    }
+
+    const messageContext = request.isScheduledTask
+      ? (session.browserContext ?? request.browserContext)
+      : request.browserContext
+    // Scheduled tasks already have correct internal pageIds from browser.newPage();
+    // resolving them again would pass those to resolveTabIds, which expects Chrome
+    // tab IDs.
+    const resolvedMessageContext = request.isScheduledTask
+      ? messageContext
+      : await resolveBrowserContextPageIds(this.deps.browser, messageContext)
+    const userContent = formatUserMessage(
+      request.message,
+      resolvedMessageContext,
+      request.selectedText,
+      request.selectedTextSource,
+    )
+
+    // Prepend tool-change context when session was rebuilt mid-conversation
+    const contextPrefix =
+      contextChanges.length > 0
+        ? `${contextChanges.map((c) => `[Context: ${c}]`).join('\n')}\n\n`
+        : ''
+
+    // Persist the *raw* user text in session.agent.messages so it
+    // round-trips clean to the client's useChat state and to any
+    // future history reload. The wrapped form (browser context +
+    // <selected_text> + <USER_QUERY>) is built as a transient prompt
+    // copy below — the LLM sees it, the user-visible state never
+    // does.
+    session.agent.appendUserMessage(request.message)
+    const promptUserText = contextPrefix + userContent
+    const wrappedUserMessageId =
+      session.agent.messages[session.agent.messages.length - 1]?.id
+
+    // ACP-backed providers run against a persistent acpx session that
+    // owns the agent's conversation memory natively on disk under
+    // <stateDir>/<sessionKey>/. Re-feeding the full UIMessage history
+    // doubles bookkeeping and, worse, trips the AI SDK validator when
+    // it walks phantom tool-<name> parts emitted by acpx-ai-provider
+    // under freshly-generated "acpx-N" ids (acpx#37). For ACP turns
+    // we send only the new user message — acpx's session/load reads
+    // prior turns from disk transparently. The UI continues to see
+    // the growing transcript via session.agent.messages.
+    //
+    // LLM-API providers are stateless and need the full history on
+    // each turn, so they keep the existing shape verbatim.
+    const isAcp = isAcpProvider(agentConfig.provider)
+    const promptUiMessages: UIMessage[] = isAcp
+      ? [
+          {
+            id: wrappedUserMessageId ?? crypto.randomUUID(),
+            role: 'user',
+            parts: [{ type: 'text', text: promptUserText }],
+          },
+        ]
+      : filterValidMessages(session.agent.messages).map((msg) =>
+          msg.id === wrappedUserMessageId && msg.role === 'user'
+            ? {
+                ...msg,
+                parts: [{ type: 'text' as const, text: promptUserText }],
+              }
+            : msg,
+        )
+
+    const response = await createAgentUIStreamResponse({
+      agent: session.agent.toolLoopAgent,
+      uiMessages: promptUiMessages,
+      abortSignal,
+      onFinish: async ({ messages }: { messages: UIMessage[] }) => {
+        // The agent loop returns `messages` containing the prompt-
+        // wrapped user text. Restore the raw form before persisting
+        // so subsequent turns see the clean text and the client's
+        // local UIMessage matches what was originally typed.
+        //
+        // ACP path: `messages` is the single user msg we sent plus
+        // the assistant's new reply. The user msg already lives in
+        // session.agent.messages via appendUserMessage; we only need
+        // to restore its raw text and append the new assistant
+        // entries from this turn.
+        //
+        // LLM-API path: `messages` is the full conversation as the
+        // AI SDK reconstructed it. Restore the wrapped user message
+        // and replace the entire session history with the result.
+        if (isAcp) {
+          // Invariant: an id in both `messages` and session means the
+          // AI SDK handed us back something we already have. With the
+          // single-user-msg input shape that means our own user msg —
+          // the only collision we expect. Any new id is a fresh
+          // assistant entry from this turn. acpx never re-emits prior
+          // turns into the AI SDK stream, so this filter cannot drop a
+          // legitimately new message.
+          const existingIds = new Set(session.agent.messages.map((m) => m.id))
+          const newMessages = messages.filter((m) => !existingIds.has(m.id))
+          const updated = session.agent.messages.map((m) =>
+            m.id === wrappedUserMessageId && m.role === 'user'
+              ? {
+                  ...m,
+                  parts: [{ type: 'text' as const, text: request.message }],
+                }
+              : m,
+          )
+          session.agent.messages = filterValidMessages([
+            ...updated,
+            ...newMessages,
+          ])
+        } else {
+          const restored = messages.map((msg) =>
+            msg.id === wrappedUserMessageId && msg.role === 'user'
+              ? {
+                  ...msg,
+                  parts: [{ type: 'text' as const, text: request.message }],
+                }
+              : msg,
+          )
+          session.agent.messages = filterValidMessages(restored)
+        }
+        logger.info('Agent execution complete', {
+          conversationId: request.conversationId,
+          totalMessages: session.agent.messages.length,
+        })
+
+        if (session?.scheduledPageId) {
+          const pageId = session.scheduledPageId
+          session.scheduledPageId = undefined
+          this.closeScheduledPage(pageId, request.conversationId)
+        }
+      },
+    })
+
+    return (
+      this.deps.activity?.trackChatResponse(response, abortSignal) ?? response
+    )
+  }
+
+  async deleteSession(
+    conversationId: string,
+  ): Promise<{ deleted: boolean; sessionCount: number }> {
+    const session = this.deps.sessionStore.get(conversationId)
+    if (session?.scheduledPageId) {
+      const pageId = session.scheduledPageId
+      session.scheduledPageId = undefined
+      this.closeScheduledPage(pageId, conversationId)
+    }
+    const deleted = await this.deps.sessionStore.delete(conversationId)
+    return { deleted, sessionCount: this.deps.sessionStore.count() }
+  }
+
+  private closeScheduledPage(pageId: number, conversationId: string): void {
+    this.deps.browser.closePage(pageId).catch((error) => {
+      logger.warn('Failed to close scheduled page', {
+        pageId,
+        conversationId,
+        error: error instanceof Error ? error.message : String(error),
+      })
+    })
+  }
+
+  private async rebuildSession(
+    session: AgentSession,
+    request: ChatRequest,
+    agentConfig: ResolvedAgentConfig,
+    mcpServerKey: string,
+  ): Promise<AgentSession> {
+    const previousMessages = session.agent.messages
+    await session.agent.dispose()
+    this.deps.sessionStore.remove(request.conversationId)
+
+    const browserContext = agentConfig.isScheduledTask
+      ? (session.browserContext ??
+        (await resolveBrowserContextPageIds(
+          this.deps.browser,
+          request.browserContext,
+        )))
+      : await resolveBrowserContextPageIds(
+          this.deps.browser,
+          request.browserContext,
+        )
+    const outputFileAccess =
+      session.outputFileAccess ?? createBrowserOutputFileAccess()
+    const agent = await AiSdkAgent.create({
+      resolvedConfig: agentConfig,
+      browserSession: this.deps.browserSession,
+      browserContext,
+      klavis: this.deps.klavis,
+      browserosId: this.deps.browserosId,
+      aiSdkDevtoolsEnabled: this.deps.aiSdkDevtoolsEnabled,
+      outputFileAccess,
+    })
+    const newSession: AgentSession = {
+      agent,
+      scheduledPageId: session.scheduledPageId,
+      browserContext,
+      mcpServerKey,
+      workingDir: request.userWorkingDir,
+      chatMode: agentConfig.chatMode ?? false,
+      outputFileAccess,
+    }
+    newSession.agent.messages = sanitizeMessagesForToolset(
+      previousMessages,
+      agent.toolNames,
+    )
+    this.deps.sessionStore.set(request.conversationId, newSession)
+    return newSession
+  }
+
+  private buildMcpServerKey(browserContext?: BrowserContext): string {
+    const managed = browserContext?.enabledMcpServers?.slice().sort() ?? []
+    const custom =
+      browserContext?.customMcpServers?.map((s) => s.url).sort() ?? []
+    const klavisState =
+      managed.length > 0
+        ? `klavis:${this.deps.klavis?.getProxyStatus().state ?? 'disabled'}`
+        : null
+    return [klavisState, ...managed, ...custom].filter(Boolean).join(',')
+  }
+}
