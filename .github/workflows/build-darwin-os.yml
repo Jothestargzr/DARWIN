@@ -17,28 +17,32 @@ jobs:
         with:
           python-version: '3.12'
 
-      - name: Install Build System
+      - name: Install Build System Dependencies
         run: |
+          python -m pip install --upgrade pip setuptools wheel
+          python -m pip install typer pyyaml requests click rich pydantic httpx
           cd BrowserOS/packages/browseros
           python -m pip install -e .
 
       - name: Fetch Chromium Source (Shallow)
         run: |
           cd BrowserOS/packages/browseros
-          python3 -m bos_build source ensure --root /tmp/chromium
+          python -m bos_build source ensure --root /tmp/chromium
 
       - name: Apply DARWIN C++ Patches
         run: |
           cd BrowserOS/packages/browseros
-          python3 -m bos_build dev apply --root /tmp/chromium || true
+          python -m bos_build dev apply --root /tmp/chromium
 
       - name: Compile DARWIN OS Binary
         run: |
           cd BrowserOS/packages/browseros
-          python3 -m bos_build build --root /tmp/chromium || true
+          python -m bos_build build --root /tmp/chromium
 
       - name: Upload DARWIN OS Artifact
         uses: actions/upload-artifact@v4
         with:
           name: DARWIN_OS_v1.0_macOS
-          path: /tmp/chromium/src/out/**/*.dmg
+          path: |
+            /tmp/chromium/**/*.dmg
+            BrowserOS/packages/browseros/out/**/*.dmg
