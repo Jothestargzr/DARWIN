@@ -7,7 +7,7 @@ on:
 
 jobs:
   build-darwin-os:
-    runs-on: macos-latest
+    runs-on: macos-14
     steps:
       - name: Checkout DARWIN Repository
         uses: actions/checkout@v4
