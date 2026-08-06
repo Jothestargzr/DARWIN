@@ -20,12 +20,17 @@ cd Core/CPP
 ROUTER_PID=$!
 cd ../..
 
-# 4. Start BrowserOS (DARWIN UI Layer)
-echo "[4/4] Launching DARWIN Standalone Desktop App..."
+# 4. Start DARWIN Meta-OCR Menu Bar Controller
+echo "[4/5] Starting DARWIN Meta-OCR Controller..."
+python3 Core/darwin_menubar.py &
+MENUBAR_PID=$!
+
+# 5. Start BrowserOS (DARWIN UI Layer)
+echo "[5/5] Launching DARWIN Standalone Desktop App..."
 /Applications/Google\ Chrome.app/Contents/MacOS/Google\ Chrome --remote-debugging-port=9005 --user-data-dir=/tmp/darwin_chrome_profile > /dev/null 2>&1 &
 cd BrowserOS/packages/browseros-agent
 export PATH="$HOME/.bun/bin:$PATH"
 bun run start:server
 
 # Cleanup on exit
-trap "kill $TELEMETRY_PID $ROUTER_PID; echo 'DARWIN Offline.'; exit" SIGINT SIGTERM
+trap "kill $TELEMETRY_PID $ROUTER_PID $MENUBAR_PID; echo 'DARWIN Offline.'; exit" SIGINT SIGTERM
