@@ -261,7 +261,7 @@ def sync(root: Path, depot_tools: Optional[Path] = None) -> None:
     gclient = depot_tools / ("gclient.bat" if sys.platform == "win32" else "gclient")
     run(
         [str(gclient), "sync", "-D", "--no-history", "--shallow"],
-        cwd=root / "src",
+        cwd=root,
         env=env,
     )
 
