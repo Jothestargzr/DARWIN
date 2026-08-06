@@ -5,3 +5,5 @@ dist/
 *.zip
 chromium/
 .env.local
+__pycache__/
+*.pyc
