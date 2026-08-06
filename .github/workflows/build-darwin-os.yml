@@ -32,7 +32,7 @@ jobs:
       - name: Compile & Package DARWIN OS Binary
         run: |
           cd BrowserOS/packages/browseros
-          python -m bos_build build --chromium-src /tmp/chromium/src --prep --build --package --no-sign --no-download
+          python -m bos_build build --preset release --skip download_resources,sign_macos,upload --chromium-src /tmp/chromium/src
 
       - name: Upload DARWIN OS Artifact
         uses: actions/upload-artifact@v4
