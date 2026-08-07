@@ -42,8 +42,12 @@ class GitSetupModule(Step):
     def execute(self, ctx: Context) -> None:
         log_info(f"\n🔀 Setting up Chromium {ctx.chromium_version}...")
 
-        log_info("📥 Fetching all tags from remote...")
-        run_command(["git", "fetch", "--tags", "--force"], cwd=ctx.chromium_src)
+        log_info(f"📥 Fetching tag {ctx.chromium_version} from remote...")
+        tag_ref = f"refs/tags/{ctx.chromium_version}"
+        run_command(
+            ["git", "fetch", "--depth=2", "--no-tags", "origin", f"+{tag_ref}:{tag_ref}"],
+            cwd=ctx.chromium_src,
+        )
 
         self._verify_tag_exists(ctx)
 
