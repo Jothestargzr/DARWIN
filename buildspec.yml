@@ -1,0 +1,56 @@
+version: 0.2
+
+phases:
+  install:
+    commands:
+      - echo "Setting up build environment..."
+      - if [ -d "/Applications/Xcode_16.0.app" ]; then sudo xcode-select -s /Applications/Xcode_16.0.app/Contents/Developer; fi
+      - python3 -m pip install --upgrade pip setuptools wheel
+      - python3 -m pip install typer pyyaml requests click rich pydantic httpx
+      - cd BrowserOS/packages/browseros && python3 -m pip install -e .
+
+  pre_build:
+    commands:
+      - echo "Fetching Chromium source..."
+      - cd BrowserOS/packages/browseros
+      - python3 -m bos_build source ensure --root /tmp/chromium
+      - |
+        # Stage resource stubs
+        mkdir -p resources/binaries/browseros_server/darwin-arm64/resources/bin
+        mkdir -p resources/binaries/browseros_server/darwin-x64/resources/bin
+        touch resources/binaries/browseros_server/darwin-arm64/resources/bin/browseros_server
+        touch resources/binaries/browseros_server/darwin-x64/resources/bin/browseros_server
+        chmod +x resources/binaries/browseros_server/darwin-arm64/resources/bin/browseros_server
+        chmod +x resources/binaries/browseros_server/darwin-x64/resources/bin/browseros_server
+
+        mkdir -p resources/binaries/browseros_claw_server_rust/darwin-arm64/resources/bin
+        mkdir -p resources/binaries/browseros_claw_server_rust/darwin-x64/resources/bin
+        touch resources/binaries/browseros_claw_server_rust/darwin-arm64/resources/bin/browseros-claw-server
+        touch resources/binaries/browseros_claw_server_rust/darwin-x64/resources/bin/browseros-claw-server
+        chmod +x resources/binaries/browseros_claw_server_rust/darwin-arm64/resources/bin/browseros-claw-server
+        chmod +x resources/binaries/browseros_claw_server_rust/darwin-x64/resources/bin/browseros-claw-server
+
+        mkdir -p resources/binaries/browseros_claw_onboard/resources/dist
+        touch resources/binaries/browseros_claw_onboard/resources/dist/index.html
+
+        mkdir -p /tmp/chromium/src/chrome/browser/browseros/server/resources/bin
+        touch /tmp/chromium/src/chrome/browser/browseros/server/resources/bin/browseros_server
+        chmod +x /tmp/chromium/src/chrome/browser/browseros/server/resources/bin/browseros_server
+
+        mkdir -p /tmp/chromium/src/chrome/browser/browseros/claw_server/resources/bin
+        touch /tmp/chromium/src/chrome/browser/browseros/claw_server/resources/bin/browseros-claw-server
+        chmod +x /tmp/chromium/src/chrome/browser/browseros/claw_server/resources/bin/browseros-claw-server
+
+        mkdir -p /tmp/chromium/src/chrome/browser/browseros/onboarding/resources/dist
+        touch /tmp/chromium/src/chrome/browser/browseros/onboarding/resources/dist/index.html
+
+  build:
+    commands:
+      - echo "Compiling & Packaging DARWIN OS..."
+      - cd BrowserOS/packages/browseros
+      - python3 -m bos_build build --preset release --gn-arg "use_siso=false" --skip download_resources,sign_macos,sparkle_sign,upload --chromium-src /tmp/chromium/src
+
+artifacts:
+  files:
+    - '/tmp/chromium/**/*.dmg'
+    - 'BrowserOS/packages/browseros/out/**/*.dmg'
