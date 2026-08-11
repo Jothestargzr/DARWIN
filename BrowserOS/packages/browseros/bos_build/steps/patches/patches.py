@@ -102,5 +102,19 @@ def apply_patches_impl(ctx: Context, interactive: bool = False) -> bool:
                 f.write(content)
             log_info("✅ Applied CGDirectDisplayID macOS 15 compatibility fix to screen_utils_mac.mm")
 
+    # Apply macOS 15 Pasteboard patch to appkit_utils.mm
+    appkit_utils_path = ctx.chromium_src / "ui/base/cocoa/appkit_utils.mm"
+    if appkit_utils_path.exists():
+        with open(appkit_utils_path, "r") as f:
+            content = f.read()
+        if "NSPasteboardAccessBehavior behavior =" in content:
+            content = content.replace("NSPasteboardAccessBehavior behavior =", "// NSPasteboardAccessBehavior behavior =")
+            content = content.replace("NSPasteboard.generalPasteboard.accessBehavior;", "// NSPasteboard.generalPasteboard.accessBehavior;")
+            content = content.replace("return behavior == NSPasteboardAccessBehaviorDefault ||", "return true; //")
+            content = content.replace("behavior == NSPasteboardAccessBehaviorAsk;", "// behavior == NSPasteboardAccessBehaviorAsk;")
+            with open(appkit_utils_path, "w") as f:
+                f.write(content)
+            log_info("✅ Applied Pasteboard macOS 15 compatibility fix to appkit_utils.mm")
+
     # Success: patches applied or interactively handled
     return True
