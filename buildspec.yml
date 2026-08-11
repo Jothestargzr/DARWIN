@@ -42,6 +42,7 @@ phases:
   build:
     commands:
       - echo "Compiling & Packaging DARWIN OS..."
+      - export PATH="/tmp/chromium/depot_tools:$PATH"
       - cd "$CODEBUILD_SRC_DIR/BrowserOS/packages/browseros"
       - python3 -m bos_build build --preset release --gn-arg "use_siso=false" --skip download_resources,sign_macos,sparkle_sign,upload --chromium-src /tmp/chromium/src
 
