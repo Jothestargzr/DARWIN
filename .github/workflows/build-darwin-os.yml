@@ -55,6 +55,16 @@ jobs:
           cd BrowserOS/packages/browseros
           python -m bos_build source ensure --root /tmp/chromium
 
+      - name: Stage BrowserOS Server Resource Stubs
+        run: |
+          mkdir -p /tmp/chromium/src/chrome/browser/browseros/server/resources/bin
+          touch /tmp/chromium/src/chrome/browser/browseros/server/resources/bin/browseros_server
+          chmod +x /tmp/chromium/src/chrome/browser/browseros/server/resources/bin/browseros_server
+
+          mkdir -p /tmp/chromium/src/chrome/browser/browseros/claw_server/resources/bin
+          touch /tmp/chromium/src/chrome/browser/browseros/claw_server/resources/bin/browseros-claw-server
+          chmod +x /tmp/chromium/src/chrome/browser/browseros/claw_server/resources/bin/browseros-claw-server
+
       - name: Compile & Package DARWIN OS Binary
         run: |
           cd BrowserOS/packages/browseros
