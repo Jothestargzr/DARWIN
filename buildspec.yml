@@ -9,12 +9,12 @@ phases:
       - if [ -d "/Applications/Xcode_16.0.app" ]; then sudo xcode-select -s /Applications/Xcode_16.0.app/Contents/Developer 2>/dev/null || true; fi
       - $PYTHON_BIN -m pip install --upgrade pip setuptools wheel
       - $PYTHON_BIN -m pip install typer pyyaml requests click rich pydantic httpx
-      - cd BrowserOS/packages/browseros && $PYTHON_BIN -m pip install -e . --no-build-isolation
+      - cd "$CODEBUILD_SRC_DIR/BrowserOS/packages/browseros" && $PYTHON_BIN -m pip install -e . --no-build-isolation
 
   pre_build:
     commands:
       - echo "Fetching Chromium source..."
-      - cd BrowserOS/packages/browseros
+      - cd "$CODEBUILD_SRC_DIR/BrowserOS/packages/browseros"
       - python3 -m bos_build source ensure --root /tmp/chromium
       - mkdir -p resources/binaries/browseros_server/darwin-arm64/resources/bin
       - mkdir -p resources/binaries/browseros_server/darwin-x64/resources/bin
@@ -42,7 +42,7 @@ phases:
   build:
     commands:
       - echo "Compiling & Packaging DARWIN OS..."
-      - cd BrowserOS/packages/browseros
+      - cd "$CODEBUILD_SRC_DIR/BrowserOS/packages/browseros"
       - python3 -m bos_build build --preset release --gn-arg "use_siso=false" --skip download_resources,sign_macos,sparkle_sign,upload --chromium-src /tmp/chromium/src
 
 artifacts:
