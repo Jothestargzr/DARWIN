@@ -1,8 +1,8 @@
 diff --git a/mojo/core/ipcz_driver/wrapped_platform_handle.cc b/mojo/core/ipcz_driver/wrapped_platform_handle.cc
-index 0000000000000..1111111111111 100644
+index a2fab55..875e0d1 100644
 --- a/mojo/core/ipcz_driver/wrapped_platform_handle.cc
 +++ b/mojo/core/ipcz_driver/wrapped_platform_handle.cc
-@@ -24,7 +24,14 @@
+@@ -22,7 +22,14 @@
  
  #if BUILDFLAG(IS_MAC)
  #include <mach/mach.h>
