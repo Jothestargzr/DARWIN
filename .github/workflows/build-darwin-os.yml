@@ -55,7 +55,7 @@ jobs:
           cd BrowserOS/packages/browseros
           python -m bos_build source ensure --root /tmp/chromium
 
-      - name: Stage BrowserOS Server Resource Stubs
+      - name: Stage BrowserOS Server Resource Stubs & Apply macOS 15 Fixes
         run: |
           cd BrowserOS/packages/browseros
           
@@ -88,6 +88,20 @@ jobs:
 
           mkdir -p /tmp/chromium/src/chrome/browser/browseros/onboarding/resources/dist
           touch /tmp/chromium/src/chrome/browser/browseros/onboarding/resources/dist/index.html
+
+          # Apply macOS 15 C++ sys/fileport.h compatibility patch directly into Chromium src
+          python3 -c "
+          import os
+          fpath = '/tmp/chromium/src/mojo/core/ipcz_driver/wrapped_platform_handle.cc'
+          if os.path.exists(fpath):
+              with open(fpath, 'r') as f:
+                  content = f.read()
+              if '#include <sys/fileport.h>' in content:
+                  content = content.replace('#include <sys/fileport.h>', '#if __has_include(<sys/fileport.h>)\n#include <sys/fileport.h>\n#else\nextern \"C\" {\nint fileport_makeport(int fd, mach_port_t *port);\nint fileport_makefd(mach_port_t port);\n}\n#endif')
+                  with open(fpath, 'w') as f:
+                      f.write(content)
+                  print('✅ Successfully patched sys/fileport.h in wrapped_platform_handle.cc')
+          "
 
       - name: Compile & Package DARWIN OS Binary
         run: |
