@@ -2,12 +2,16 @@ version: 0.2
 
 phases:
   install:
+    runtime-versions:
+      python: 3.x
     commands:
       - echo "Setting up build environment..."
-      - if [ -d "/Applications/Xcode_16.0.app" ]; then sudo xcode-select -s /Applications/Xcode_16.0.app/Contents/Developer; fi
-      - python3 -m pip install --upgrade pip setuptools wheel
-      - python3 -m pip install typer pyyaml requests click rich pydantic httpx
-      - cd BrowserOS/packages/browseros && python3 -m pip install -e .
+      - if command -v python3.12 >/dev/null 2>&1; then PYTHON_BIN="python3.12"; elif command -v python3.10 >/dev/null 2>&1; then PYTHON_BIN="python3.10"; else PYTHON_BIN="python3"; fi
+      - echo "Using Python: $($PYTHON_BIN --version)"
+      - if [ -d "/Applications/Xcode_16.0.app" ]; then sudo xcode-select -s /Applications/Xcode_16.0.app/Contents/Developer 2>/dev/null || true; fi
+      - $PYTHON_BIN -m pip install --upgrade pip setuptools wheel
+      - $PYTHON_BIN -m pip install typer pyyaml requests click rich pydantic httpx
+      - cd BrowserOS/packages/browseros && $PYTHON_BIN -m pip install -e . --no-build-isolation
 
   pre_build:
     commands:
