@@ -91,5 +91,16 @@ def apply_patches_impl(ctx: Context, interactive: bool = False) -> bool:
                 f.write(content)
             log_info("✅ Applied kCGImageByteOrder32Host macOS 15 compatibility fix to skia_utils_mac.mm")
 
+    # Apply macOS 15 CGDirectDisplayID patch to screen_utils_mac.mm
+    screen_utils_path = ctx.chromium_src / "ui/display/mac/screen_utils_mac.mm"
+    if screen_utils_path.exists():
+        with open(screen_utils_path, "r") as f:
+            content = f.read()
+        if "screen.CGDirectDisplayID" in content:
+            content = content.replace("screen.CGDirectDisplayID", '[[[screen deviceDescription] objectForKey:@"NSScreenNumber"] unsignedIntValue]')
+            with open(screen_utils_path, "w") as f:
+                f.write(content)
+            log_info("✅ Applied CGDirectDisplayID macOS 15 compatibility fix to screen_utils_mac.mm")
+
     # Success: patches applied or interactively handled
     return True
