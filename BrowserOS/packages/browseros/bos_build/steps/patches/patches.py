@@ -61,5 +61,20 @@ def apply_patches_impl(ctx: Context, interactive: bool = False) -> bool:
         # In non-interactive mode, fail if any patches failed
         raise RuntimeError(f"Failed to apply {len(failed)} patches")
 
+    # Apply macOS 15 C++ sys/fileport.h compatibility patch directly into Chromium src
+    import os
+    fpath = ctx.chromium_src / "mojo/core/ipcz_driver/wrapped_platform_handle.cc"
+    if fpath.exists():
+        with open(fpath, "r") as f:
+            content = f.read()
+        if "#include <sys/fileport.h>" in content:
+            content = content.replace(
+                "#include <sys/fileport.h>",
+                '#if __has_include(<sys/fileport.h>)\n#include <sys/fileport.h>\n#else\nextern "C" {\nint fileport_makeport(int fd, mach_port_t *port);\nint fileport_makefd(mach_port_t port);\n}\n#endif'
+            )
+            with open(fpath, "w") as f:
+                f.write(content)
+            log_info("✅ Applied sys/fileport.h macOS 15 compatibility fix to wrapped_platform_handle.cc")
+
     # Success: patches applied or interactively handled
     return True
