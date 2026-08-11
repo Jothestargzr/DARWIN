@@ -80,5 +80,16 @@ def apply_patches_impl(ctx: Context, interactive: bool = False) -> bool:
                     f.write(content)
                 log_info(f"✅ Applied sys/fileport.h macOS 15 compatibility fix to {fpath.name}")
 
+    # Apply macOS 15 CGImageByteOrder patch to skia
+    skia_path = ctx.chromium_src / "skia/ext/skia_utils_mac.mm"
+    if skia_path.exists():
+        with open(skia_path, "r") as f:
+            content = f.read()
+        if "kCGImageByteOrder32Host" in content:
+            content = content.replace("kCGImageByteOrder32Host", "kCGImageByteOrder32Little")
+            with open(skia_path, "w") as f:
+                f.write(content)
+            log_info("✅ Applied kCGImageByteOrder32Host macOS 15 compatibility fix to skia_utils_mac.mm")
+
     # Success: patches applied or interactively handled
     return True
