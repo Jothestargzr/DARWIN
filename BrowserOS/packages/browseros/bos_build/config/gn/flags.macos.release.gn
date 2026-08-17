@@ -38,7 +38,4 @@ enable_remoting = false
 enable_hangout_services_extension = false
 enable_mdns = false
 exclude_unwind_tables = true
-enable_pdf = false
-enable_printing = false
-enable_print_preview = false
 # --------------------------------
