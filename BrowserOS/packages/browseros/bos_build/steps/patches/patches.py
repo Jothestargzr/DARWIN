@@ -80,16 +80,20 @@ def apply_patches_impl(ctx: Context, interactive: bool = False) -> bool:
                     f.write(content)
                 log_info(f"✅ Applied sys/fileport.h macOS 15 compatibility fix to {fpath.name}")
 
-    # Apply macOS 15 CGImageByteOrder patch to skia
-    skia_path = ctx.chromium_src / "skia/ext/skia_utils_mac.mm"
-    if skia_path.exists():
-        with open(skia_path, "r") as f:
-            content = f.read()
-        if "kCGImageByteOrder32Host" in content:
-            content = content.replace("kCGImageByteOrder32Host", "kCGImageByteOrder32Little")
-            with open(skia_path, "w") as f:
-                f.write(content)
-            log_info("✅ Applied kCGImageByteOrder32Host macOS 15 compatibility fix to skia_utils_mac.mm")
+    # Apply macOS 15 CGImageByteOrder patch to skia and blink
+    cg_targets = [
+        ctx.chromium_src / "skia/ext/skia_utils_mac.mm",
+        ctx.chromium_src / "third_party/blink/renderer/platform/mac/graphics_context_canvas.mm"
+    ]
+    for fpath in cg_targets:
+        if fpath.exists():
+            with open(fpath, "r") as f:
+                content = f.read()
+            if "kCGImageByteOrder32Host" in content:
+                content = content.replace("kCGImageByteOrder32Host", "kCGImageByteOrder32Little")
+                with open(fpath, "w") as f:
+                    f.write(content)
+                log_info(f"✅ Applied kCGImageByteOrder32Host macOS 15 compatibility fix to {fpath.name}")
 
     # Apply macOS 15 CGDirectDisplayID patch to screen_utils_mac.mm
     screen_utils_path = ctx.chromium_src / "ui/display/mac/screen_utils_mac.mm"
