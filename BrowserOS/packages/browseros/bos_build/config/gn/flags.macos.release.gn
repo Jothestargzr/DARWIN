@@ -33,7 +33,6 @@ disable_fieldtrial_testing_config=true
 
 # --- Super Lean Configuration ---
 optimize_for_size = true
-enable_nacl = false
 enable_remoting = false
 enable_hangout_services_extension = false
 enable_mdns = false
