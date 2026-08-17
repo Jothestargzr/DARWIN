@@ -41,5 +41,4 @@ exclude_unwind_tables = true
 enable_pdf = false
 enable_printing = false
 enable_print_preview = false
-enable_extensions = false
 # --------------------------------
