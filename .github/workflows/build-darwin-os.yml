@@ -2,12 +2,11 @@ name: Build DARWIN OS (Cloud Compiler)
 
 on:
   workflow_dispatch:
-  push:
-    branches: [ main, master ]
 
 jobs:
   build-darwin-os:
     runs-on: macos-15
+    timeout-minutes: 350  # 5h50m — leave margin before GHA's 6h hard limit
     steps:
       - name: Checkout DARWIN Repository
         uses: actions/checkout@v4
@@ -49,6 +48,28 @@ jobs:
           python -m pip install typer pyyaml requests click rich pydantic httpx
           cd BrowserOS/packages/browseros
           python -m pip install -e .
+
+      - name: Install ccache
+        run: |
+          brew install ccache
+          ccache --version
+          # Configure ccache for massive Chromium build
+          ccache --set-config=max_size=8G
+          ccache --set-config=compression=true
+          ccache --set-config=compression_level=6
+          ccache --set-config=sloppiness=include_file_mtime,include_file_ctime,time_macros,file_stat_matches
+          echo "CCACHE_DIR=$HOME/.ccache" >> $GITHUB_ENV
+
+      - name: Restore ccache from previous run
+        uses: actions/cache/restore@v4
+        with:
+          path: ~/.ccache
+          key: darwin-ccache-x64-${{ github.sha }}
+          restore-keys: |
+            darwin-ccache-x64-
+
+      - name: Show ccache stats (before)
+        run: ccache --show-stats
 
       - name: Fetch Chromium Source (Shallow)
         run: |
@@ -104,14 +125,39 @@ jobs:
           "
 
       - name: Compile & Package DARWIN OS Binary
+        id: compile
         run: |
           cd BrowserOS/packages/browseros
-          python -m bos_build build --preset release --arch x64 --gn-arg "use_siso=false" --skip download_resources,sign_macos,sparkle_sign,upload --chromium-src /tmp/chromium/src
+          python -m bos_build build --preset release --arch x64 --gn-arg "use_siso=false" --gn-arg 'cc_wrapper="ccache"' --skip download_resources,sign_macos,sparkle_sign,upload --chromium-src /tmp/chromium/src
+          echo "BUILD_COMPLETE=true" >> $GITHUB_ENV
+
+      - name: Show ccache stats (after)
+        if: always()
+        run: ccache --show-stats
+
+      - name: Save ccache for next run
+        if: always()
+        uses: actions/cache/save@v4
+        with:
+          path: ~/.ccache
+          key: darwin-ccache-x64-${{ github.sha }}-${{ github.run_number }}
 
       - name: Upload DARWIN OS Artifact
+        if: env.BUILD_COMPLETE == 'true'
         uses: actions/upload-artifact@v4
         with:
-          name: DARWIN_OS_v1.0_macOS
+          name: DARWIN_OS_v1.0_macOS_x64
           path: |
             /tmp/chromium/**/*.dmg
             BrowserOS/packages/browseros/out/**/*.dmg
+
+      - name: Build Status Summary
+        if: always()
+        run: |
+          if [ "$BUILD_COMPLETE" = "true" ]; then
+            echo "🎉 BUILD SUCCEEDED! The .dmg artifact has been uploaded."
+          else
+            echo "⏳ Build did not finish in this run. ccache has been saved."
+            echo "👉 Trigger another workflow_dispatch run to continue where we left off."
+            echo "   Each subsequent run will be MUCH faster thanks to ccache."
+          fi
